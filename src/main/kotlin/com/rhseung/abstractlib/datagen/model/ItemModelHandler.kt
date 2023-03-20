@@ -3,11 +3,10 @@ package net.rhseung.rhseungslib.datagen.model
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.rhseung.abstractlib.api.file.Location
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.item.Item
 import net.minecraft.util.Identifier
-import net.rhseung.rhseungslib.Mod.minecraftID
-import net.rhseung.rhseungslib.registration.RegistryHelper
 import java.util.function.BiConsumer
 import java.util.function.Supplier
 
@@ -16,14 +15,14 @@ class ItemModelHandler (
 	val modelGenerator: ItemModelGenerator
 ) {
 	object Parents {
-		val EMPTY = minecraftID("item/")
-		val GENERATED = minecraftID("item/generated")
-		val HANDHELD = minecraftID("item/handheld")
-		val HANDHELD_ROD = minecraftID("item/handheld_rod")
-		val TEMPLATE_SHULKER_BOX = minecraftID("item/template_shulker_box")
-		val TEMPLATE_BED = minecraftID("item/template_bed")
-		val TEMPLATE_BANNER = minecraftID("item/template_banner")
-		val TEMPLATE_SKULL = minecraftID("item/template_skull")
+		val EMPTY = Location("item/")
+		val GENERATED = Location("item/generated")
+		val HANDHELD = Location("item/handheld")
+		val HANDHELD_ROD = Location("item/handheld_rod")
+		val TEMPLATE_SHULKER_BOX = Location("item/template_shulker_box")
+		val TEMPLATE_BED = Location("item/template_bed")
+		val TEMPLATE_BANNER = Location("item/template_banner")
+		val TEMPLATE_SKULL = Location("item/template_skull")
 	}
 	
 	private fun BiConsumer<Identifier, Supplier<JsonElement>>.upload(builder: ItemModelBuilder): Identifier {

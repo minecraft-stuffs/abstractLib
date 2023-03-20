@@ -1,5 +1,7 @@
 package com.rhseung.abstractlib.api.registration
 
+import com.rhseung.abstractlib.api.file.Location
+import com.rhseung.abstractlib.api.file.Location.Companion.with
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.minecraft.block.Block
@@ -15,7 +17,7 @@ object RegistryManager {
     // Items
     fun <T : Item> register(
         item: T,
-        id: Identifier,
+        id: Location,
         group: ItemGroup? = null,
     ): T {
         if (group != null)
@@ -30,14 +32,14 @@ object RegistryManager {
         return Registries.ITEM.streamEntries().map { it.value() }.filter { clazz.isInstance(it) }.map { it as T }.toList()
     }
 
-    fun getId(item: Item): Identifier {
-        return Registries.ITEM.getId(item).withPrefixedPath("item/")
+    fun getId(item: Item): Location {
+        return Location(Registries.ITEM.getId(item)).with { "item/$it" }
     }
 
     // Blocks
     fun <T : Block> register(
         block: T,
-        id: Identifier,
+        id: Location,
         group: ItemGroup? = null,
     ): T {
         if (group != null)
@@ -54,25 +56,25 @@ object RegistryManager {
         return Registries.BLOCK.streamEntries().map { it.value() }.filter { clazz.isInstance(it) }.map { it as T }.toList()
     }
 
-    fun getId(block: Block): Identifier {
-        return Registries.BLOCK.getId(block).withPrefixedPath("block/")
+    fun getId(block: Block): Location {
+        return Location(Registries.BLOCK.getId(block)).with { "block/$it" }
     }
 
     // ItemGroups
     fun register(
-        id: Identifier,
+        id: Location,
         icon: ItemConvertible
     ): ItemGroup {
         return FabricItemGroup.builder(id).icon { ItemStack(icon) }.build()
     }
 
-    fun getId(group: ItemGroup): Identifier {
-        return group.id
+    fun getId(group: ItemGroup): Location {
+        return Location(group.id)
     }
 
     // Recipes
     fun register(
-        id: Identifier,
+        id: Location,
         recipeType: RecipeType<*>,
         recipeSerializer: RecipeSerializer<*>,
     ) {

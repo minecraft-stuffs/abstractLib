@@ -18,7 +18,7 @@ import java.util.function.ToIntFunction
 
 class BasicBlock private constructor(
     val id: Identifier,
-    val setting: Settings,
+    val setting: Settings
 ) : Block(setting.settings), IBasicRegistryKey {
 	
 	init {
