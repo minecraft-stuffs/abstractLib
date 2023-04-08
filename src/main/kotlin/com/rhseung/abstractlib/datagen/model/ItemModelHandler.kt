@@ -4,6 +4,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.rhseung.abstractlib.api.file.Location
+import com.rhseung.abstractlib.api.model.ParentType
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.item.Item
 import net.minecraft.util.Identifier
@@ -14,17 +15,6 @@ class ItemModelHandler (
 	val modId: String,
 	val modelGenerator: ItemModelGenerator
 ) {
-	object Parents {
-		val EMPTY = Location("item/")
-		val GENERATED = Location("item/generated")
-		val HANDHELD = Location("item/handheld")
-		val HANDHELD_ROD = Location("item/handheld_rod")
-		val TEMPLATE_SHULKER_BOX = Location("item/template_shulker_box")
-		val TEMPLATE_BED = Location("item/template_bed")
-		val TEMPLATE_BANNER = Location("item/template_banner")
-		val TEMPLATE_SKULL = Location("item/template_skull")
-	}
-	
 	private fun BiConsumer<Identifier, Supplier<JsonElement>>.upload(builder: ItemModelBuilder): Identifier {
 		this.accept(builder.model.id, Supplier {
 			val jsonObject = JsonObject()
@@ -85,7 +75,7 @@ class ItemModelHandler (
 	
 	fun <T : Item> generateItem(
 		item: T,
-		parent: Identifier = Parents.GENERATED,
+		parent: ParentType = ParentType.GENERATED,
 	) {
 		val identifier = RegistryHelper.getId(item)
 		
