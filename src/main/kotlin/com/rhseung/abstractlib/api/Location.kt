@@ -3,8 +3,8 @@ package com.rhseung.abstractlib.api
 import net.minecraft.util.Identifier
 
 class Location(
-    val namespace: String,
-    val path: String
+    namespace: String,
+    path: String
 ) : Identifier(namespace, path) {
 
     constructor(path: String): this("minecraft", path)

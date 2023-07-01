@@ -13,16 +13,16 @@ class ModBlockLootTableProvider(
 ) : AbstractBlockLootTableProvider(output) {
 
     override fun register(handler: BlockLootTableHandler) {
-        handler.builder(this) {
-            from { Blocks.NETHERITE_BLOCK }
-
-            case (BlockLootTableHandler.Condition.SILK_TOUCH) {
-                drop { Items.NETHERITE_BLOCK }
-            }
-            default {
-                drops { Items.NETHERITE_INGOT counts 3..9 }
-                applyFortune { true }
-            }
-        }
+//        handler.builder(this) {
+//            from { Blocks.NETHERITE_BLOCK }
+//
+//            case (BlockLootTableHandler.Condition.SILK_TOUCH) {
+//                drop { Items.NETHERITE_BLOCK }
+//            }
+//            default {
+//                drops { Items.NETHERITE_INGOT counts 3..9 }
+//                applyFortune { true }
+//            }
+//        }
     }
 }

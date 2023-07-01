@@ -3,6 +3,8 @@ package com.rhseung.abstractlib.data
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.rhseung.abstractlib.api.Parents
+import com.rhseung.abstractlib.init.BasicItem
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.util.Identifier
 import java.util.function.BiConsumer
@@ -49,7 +51,7 @@ class ItemModelHandler(
         private val textures = mutableListOf<Texture>()
 
         fun path(lambda: () -> String): ModelBuilder {
-            id = Identifier(modId, lambda())
+            id = Identifier(modId, "item/" + lambda())
             return this
         }
 
@@ -59,7 +61,7 @@ class ItemModelHandler(
         }
 
         fun textures(lambda: TextureListBuilder.() -> Unit): ModelBuilder {
-            textures.addAll(TextureListBuilder().apply(lambda).build())
+            textures.addAll(TextureListBuilder(modId).apply(lambda).build())
             return this
         }
 
@@ -68,7 +70,7 @@ class ItemModelHandler(
 
     data class Texture(var key: String, val path: String)
 
-    class TextureBuilder {
+    class TextureBuilder(val modId: String) {
         var key: String = ""
         var path: String = ""
 
@@ -78,17 +80,18 @@ class ItemModelHandler(
         }
 
         fun path(lambda: () -> String): TextureBuilder {
-            this.path = lambda()
+            this.path = Identifier(modId, "item/" + lambda()).toString()
             return this
         }
 
         fun build() = Texture(key, path)
     }
-    class TextureListBuilder {
+
+    class TextureListBuilder(val modId: String) {
         private val textureList = mutableListOf<Texture>()
 
         fun texture(lambda: TextureBuilder.() -> Unit): TextureListBuilder {
-            val texture = TextureBuilder().apply(lambda).build()
+            val texture = TextureBuilder(modId).apply(lambda).build()
             if (texture.key.isBlank())
                 texture.key = "layer${textureList.count()}"
 
@@ -98,7 +101,7 @@ class ItemModelHandler(
 
         fun <T : Any> from(collection: Collection<T>, lambda: TextureBuilder.(it: T) -> Unit): TextureListBuilder {
             collection.forEach {
-                val texture = TextureBuilder().apply { lambda(it) }.build()
+                val texture = TextureBuilder(modId).apply { lambda(it) }.build()
                 if (texture.key.isBlank())
                     texture.key = "layer${textureList.count()}"
 
@@ -111,6 +114,7 @@ class ItemModelHandler(
     }
 
     data class Override(val predicates: MutableMap<Identifier, Number>, val model: Model)
+
     class OverrideBuilder(val modId: String) {
         var predicates = mutableMapOf<Identifier, Number>()
         lateinit var model: Model
@@ -127,6 +131,7 @@ class ItemModelHandler(
 
         fun build() = Override(predicates, model)
     }
+
     class OverrideListBuilder(val modId: String) {
         private val overrideList = mutableListOf<Override>()
 
@@ -197,5 +202,20 @@ class ItemModelHandler(
                 }
             )
         }
+    }
+
+    fun simple(item: BasicItem, path: String = item.loc.path) {
+        this.generate(builder {
+            model {
+                path { item.loc.path }
+                parent { Parents.GENERATED }
+                textures {
+                    texture {
+                        key { "layer0" }
+                        path { path }
+                    }
+                }
+            }
+        })
     }
 }

@@ -14,7 +14,5 @@ abstract class AbstractLanguageProvider(
         register(handler)
     }
 
-    open fun register(handler: LanguageHandler) {
-        handler += Items.ACACIA_BOAT to "Acacia Boat"
-    }
+    open fun register(handler: LanguageHandler) {}
 }

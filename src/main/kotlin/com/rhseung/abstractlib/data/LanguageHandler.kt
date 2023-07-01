@@ -16,43 +16,43 @@ class LanguageHandler(
     val modId: String,
     val translationBuilder: FabricLanguageProvider.TranslationBuilder
 ) {
-    operator fun plusAssign(new: Pair<Item, String>) {
+    fun addItem(new: Pair<Item, String>) {
         translationBuilder.add(new.first, new.second)
     }
 
-    operator fun plusAssign(new: Pair<Block, String>) {
+    fun addBlock(new: Pair<Block, String>) {
         translationBuilder.add(new.first, new.second)
     }
 
-    operator fun plusAssign(new: Pair<Identifier, String>) {
-        translationBuilder.add(new.first, new.second)
-    }
-
-    operator fun plusAssign(new: Pair<String, String>) {
-        translationBuilder.add(Identifier(modId, new.first), new.second)
-    }
-
-    operator fun plusAssign(new: Pair<Enchantment, String>) {
-        translationBuilder.add(new.first, new.second)
-    }
-
-    operator fun plusAssign(new: Pair<EntityType<*>, String>) {
-        translationBuilder.add(new.first, new.second)
-    }
-
-    operator fun plusAssign(new: Pair<EntityAttribute, String>) {
-        translationBuilder.add(new.first, new.second)
-    }
-
-    operator fun plusAssign(new: Pair<RegistryKey<ItemGroup>, String>) {
-        translationBuilder.add(new.first, new.second)
-    }
-
-    operator fun plusAssign(new: Pair<StatusEffect, String>) {
-        translationBuilder.add(new.first, new.second)
-    }
-
-    operator fun plusAssign(new: Pair<StatType<*>, String>) {
-        translationBuilder.add(new.first, new.second)
-    }
+//    fun add(new: Pair<Identifier, String>) {
+//        translationBuilder.add(new.first, new.second)
+//    }
+//
+//    fun add(new: Pair<String, String>) {
+//        translationBuilder.add(Identifier(modId, new.first), new.second)
+//    }
+//
+//    fun add(new: Pair<Enchantment, String>) {
+//        translationBuilder.add(new.first, new.second)
+//    }
+//
+//    fun add(new: Pair<EntityType<*>, String>) {
+//        translationBuilder.add(new.first, new.second)
+//    }
+//
+//    fun add(new: Pair<EntityAttribute, String>) {
+//        translationBuilder.add(new.first, new.second)
+//    }
+//
+//    fun add(new: Pair<RegistryKey<ItemGroup>, String>) {
+//        translationBuilder.add(new.first, new.second)
+//    }
+//
+//    fun add(new: Pair<StatusEffect, String>) {
+//        translationBuilder.add(new.first, new.second)
+//    }
+//
+//    fun add(new: Pair<StatType<*>, String>) {
+//        translationBuilder.add(new.first, new.second)
+//    }
 }

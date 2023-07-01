@@ -1,4 +1,4 @@
-package com.rhseung.abstractlib.data
+package com.rhseung.abstractlib.api
 
 import net.minecraft.util.Identifier
 

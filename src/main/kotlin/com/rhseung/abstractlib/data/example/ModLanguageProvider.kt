@@ -11,6 +11,7 @@ class ModLanguageProvider(
 ) : AbstractLanguageProvider(output, languageCode) {
 
     override fun register(handler: LanguageHandler) {
-        handler.add(ExampleInit.EXAMPLE_INGOT to "Example Ingot")
+        handler.addItem(ExampleInit.EXAMPLE_INGOT to ExampleInit.EXAMPLE_INGOT.translationName.en_us)
+        handler.addBlock(ExampleInit.EXAMPLE_BLOCK to ExampleInit.EXAMPLE_BLOCK.translationName.en_us)
     }
 }

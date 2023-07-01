@@ -1,4 +1,9 @@
 package com.rhseung.abstractlib
 
-object ModClient {
+import net.fabricmc.api.ClientModInitializer
+
+object ModClient : ClientModInitializer {
+    override fun onInitializeClient() {
+
+    }
 }
