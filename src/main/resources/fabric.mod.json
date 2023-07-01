@@ -3,37 +3,46 @@
 	"id": "abstractlib",
 	"version": "${version}",
 	"name": "AbstractLib",
-	"description": "abstract library for fabric modding",
+	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Rhseung"
+		"Me!"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "MIT License",
+	"license": "CC0-1.0",
 	"icon": "assets/abstractlib/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			{
-				"value": "com.rhseung.abstractlib.ModInit",
+				"value": "com.rhseung.abstractlib.Mod",
 				"adapter": "kotlin"
 			}
 		],
-		"preLaunch": [
-			"com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
+		"client": [
+			{
+				"value": "com.rhseung.abstractlib.ModClient",
+				"adapter": "kotlin"
+			}
+		],
+		"fabric-datagen": [
+			{
+				"value": "com.rhseung.abstractlib.ModData",
+				"adapter": "kotlin"
+			}
 		]
 	},
 	"mixins": [
 		"abstractlib.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.17",
-		"minecraft": "1.19.4",
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20.1",
 		"java": ">=17",
 		"fabric-api": "*",
-		"fabric-language-kotlin": ">=1.8.10"
+		"fabric-language-kotlin": ">=1.8.22"
 	},
 	"suggests": {
 		"another-mod": "*"
