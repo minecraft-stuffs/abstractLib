@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "abstractlib:block/example_block"
+    "all": "abstractlib:block/brass_block"
   }
 }

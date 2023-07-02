@@ -24,7 +24,7 @@ class BlockLootTableHandler(
 ) {
 
     fun drop(block: Block, drop: ItemConvertible) {
-        builder(generator) {
+        builder {
             from { block }
             default {
                 drop { drop }
@@ -33,7 +33,7 @@ class BlockLootTableHandler(
     }
 
     fun dropSelf(block: Block) {
-        builder(generator) {
+        builder {
             from { block }
             default {
                 drop { block }
@@ -42,7 +42,7 @@ class BlockLootTableHandler(
     }
 
     fun dropConditional(block: Block, drop: ItemConvertible, condition: LootCondition.Builder) {
-        builder(generator) {
+        builder {
             from { block }
             case (condition) {
                 drop { drop }
@@ -59,7 +59,7 @@ class BlockLootTableHandler(
     }
 
     fun dropOre(block: Block, drop: ItemConvertible) {
-        builder(generator) {
+        builder {
             from { block }
             case (Condition.SILK_TOUCH) {
                 drop { block }
@@ -72,7 +72,7 @@ class BlockLootTableHandler(
     }
 
     fun dropOre(block: Block, drop: Drop) {
-        builder(generator) {
+        builder {
             from { block }
             case (Condition.SILK_TOUCH) {
                 drop { block }
@@ -126,7 +126,7 @@ class BlockLootTableHandler(
         }
     }
 
-    fun builder(generator: BlockLootTableGenerator, block: Builder.() -> Unit) = Builder(generator).apply(block).build()
+    fun builder(block: Builder.() -> Unit) = Builder(generator).apply(block).build()
 
     class Builder(val generator: BlockLootTableGenerator) {
         private val pools = mutableListOf<LootPool.Builder>()
@@ -181,8 +181,8 @@ class BlockLootTableHandler(
         }
 
         fun build(): LootPool.Builder {
-            // TODO: applyExplosionDecay
-            // TODO: 내부 코드 뜯어서 다 호환시키기
+            // todo: applyExplosionDecay
+            // todo: 내부 코드 뜯어서 다 호환시키기
 
             var pool = LootPool.builder().rolls(ConstantLootNumberProvider.create(rolls.toFloat()))
 

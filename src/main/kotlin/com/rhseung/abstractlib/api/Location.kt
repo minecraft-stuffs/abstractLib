@@ -18,6 +18,6 @@ class Location(
         fun Location.with(change: (String) -> String) = Location(namespace, change(path))
         operator fun Location.plus(postfix: String) = this.with { it + postfix }
         operator fun String.plus(location: Location) = location.with { this + it }
-        operator fun String.div(path: String) = Location(this, path)
+        infix fun String.of(modId: String) = Location(modId, this)
     }
 }

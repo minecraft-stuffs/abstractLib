@@ -1,5 +1,5 @@
-// 1.20.1	2023-07-01T23:32:57.1279163	AbstractLib/Model Definitions
-905eb04a11691939f84359900f874aa11851b19a assets\abstractlib\models\item\example_block.json
-68bd84cb80620e50ce5371a4765d0c5c109faa9c assets\abstractlib\models\block\example_block.json
-276152e005413bb895c4c988354cb457370a9fba assets\abstractlib\models\item\example_ingot.json
-3dba6ebbbcedacab742d441a28b326ef16dd73ec assets\abstractlib\blockstates\example_block.json
+// 1.20.1	2023-07-02T15:22:05.2056581	AbstractLib/Model Definitions
+0ca99b8b346590c02f6d03ed7d9bc65484ed6d32 assets\abstractlib\models\block\brass_block.json
+bf0ccfac211ee36b1c42372f76b657f4b903edf0 assets\abstractlib\models\item\brass_ingot.json
+d0480d0ca51de27a19b076a923f25048279e2f09 assets\abstractlib\models\item\brass_block.json
+c930e5a4e358d05884859521305e0620c0a19f3e assets\abstractlib\blockstates\brass_block.json

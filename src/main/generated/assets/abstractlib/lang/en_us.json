@@ -1,4 +1,4 @@
 {
-  "block.abstractlib.example_block": "Block of Example",
-  "item.abstractlib.example_ingot": "Example Ingot"
+  "block.abstractlib.brass_block": "Block of Brass",
+  "item.abstractlib.brass_ingot": "Brass Ingot"
 }

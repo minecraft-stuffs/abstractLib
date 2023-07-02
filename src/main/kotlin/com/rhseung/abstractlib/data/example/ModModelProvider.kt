@@ -3,7 +3,7 @@ package com.rhseung.abstractlib.data.example
 import com.rhseung.abstractlib.data.AbstractModelProvider
 import com.rhseung.abstractlib.data.BlockModelHandler
 import com.rhseung.abstractlib.data.ItemModelHandler
-import com.rhseung.abstractlib.init.example.ExampleInit
+import com.rhseung.abstractlib.init.example.ModInit
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
 class ModModelProvider(
@@ -11,10 +11,10 @@ class ModModelProvider(
 ) : AbstractModelProvider(output) {
 
     override fun registerItem(handler: ItemModelHandler) {
-        handler.simple(ExampleInit.EXAMPLE_INGOT)
+        handler.simple(ModInit.BRASS_INGOT)
     }
 
     override fun registerBlock(handler: BlockModelHandler) {
-        handler.simple(ExampleInit.EXAMPLE_BLOCK)
+        handler.simple(ModInit.BRASS_BLOCK)
     }
 }
