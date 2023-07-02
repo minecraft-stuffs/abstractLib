@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "abstractlib:block/block_2"
+    }
+  }
+}

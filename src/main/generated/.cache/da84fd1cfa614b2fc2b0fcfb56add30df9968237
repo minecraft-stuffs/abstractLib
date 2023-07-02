@@ -1,3 +1,8 @@
-// 1.20.1	2023-07-02T15:22:05.2126642	AbstractLib/Tags for minecraft:block
-a3c1ed51076b93900f30464f55467dd46c4d13e3 data\minecraft\tags\blocks\needs_iron_tool.json
-a3c1ed51076b93900f30464f55467dd46c4d13e3 data\minecraft\tags\blocks\mineable\pickaxe.json
+// 1.20.1	2023-07-02T18:39:05.150773	AbstractLib/Tags for minecraft:block
+be26440f67e02842d5c69969254dfe9d93b41e13 data\minecraft\tags\blocks\needs_tool_level_4.json
+968d7c9aa2781e862b020ebef5f0e7ce4a95ed0a data\minecraft\tags\blocks\mineable\axe.json
+e93a8ea694ccc487713288704ff071647c0cefe0 data\minecraft\tags\blocks\mineable\hoe.json
+5458ca5ed61e5ed99e59c1ce045203ba9d6c914d data\minecraft\tags\blocks\needs_iron_tool.json
+367ce9a8f9af70a885183e4ca444f2eb8bbf300d data\minecraft\tags\blocks\mineable\shovel.json
+11a491a633bd06d73c01723451741d6d66b9ae31 data\minecraft\tags\blocks\mineable\pickaxe.json
+968d7c9aa2781e862b020ebef5f0e7ce4a95ed0a data\minecraft\tags\blocks\needs_stone_tool.json

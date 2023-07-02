@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "abstractlib:brass_block"
+          "name": "abstractlib:block_3"
         }
       ],
       "functions": [

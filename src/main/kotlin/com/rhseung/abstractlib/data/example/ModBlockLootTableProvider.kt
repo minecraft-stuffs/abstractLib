@@ -2,10 +2,10 @@ package com.rhseung.abstractlib.data.example
 
 import com.rhseung.abstractlib.data.AbstractBlockLootTableProvider
 import com.rhseung.abstractlib.data.BlockLootTableHandler
-import com.rhseung.abstractlib.init.BasicBlock
-import com.rhseung.abstractlib.init.BasicItem
-import com.rhseung.abstractlib.init.Register
+import com.rhseung.abstractlib.data.BlockLootTableHandler.Condition.SILK_TOUCH
 import com.rhseung.abstractlib.init.example.ModInit
+import com.rhseung.abstractlib.registration.BasicBlock
+import com.rhseung.abstractlib.registration.Register
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
 class ModBlockLootTableProvider(

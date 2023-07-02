@@ -3,9 +3,9 @@ package com.rhseung.abstractlib.data
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
-import com.rhseung.abstractlib.api.Parents
-import com.rhseung.abstractlib.api.TextureType
-import com.rhseung.abstractlib.init.BasicItem
+import com.rhseung.abstractlib.api.file.Parents
+import com.rhseung.abstractlib.api.file.TextureType
+import com.rhseung.abstractlib.registration.BasicItem
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.util.Identifier
 import java.util.function.BiConsumer

@@ -1,2 +1,6 @@
-// 1.20.1	2023-07-02T15:22:05.2206629	AbstractLib/Block Loot Tables
-10346f4ff67bb6074ed3fcf0b23d78f4823349fc data\abstractlib\loot_tables\blocks\brass_block.json
+// 1.20.1	2023-07-02T18:39:05.1529559	AbstractLib/Block Loot Tables
+1868bd00eb31290763b68db6c7fa6373e83909f4 data\abstractlib\loot_tables\blocks\block_3.json
+b6a349368c92a02eca543989912e54f33f6f3dd1 data\abstractlib\loot_tables\blocks\block_1.json
+88b218c5f39204d6da5aa5b466224a65a70d6075 data\abstractlib\loot_tables\blocks\block_2.json
+969e2848033457eb0986233d5d3856b92e61f3c3 data\abstractlib\loot_tables\blocks\block_5.json
+af3f23f666b15c7a26726af1fabfdb2ec3ba194e data\abstractlib\loot_tables\blocks\block_4.json

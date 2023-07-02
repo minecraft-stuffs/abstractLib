@@ -14,7 +14,8 @@ object ModData : DataGeneratorEntrypoint {
 		val pack = fabricDataGenerator.createPack()
 
 		pack.addProvider { output: FabricDataOutput -> ModModelProvider(output) }
-		pack.addProvider { output: FabricDataOutput -> ModLanguageProvider(output) }
+		pack.addProvider { output: FabricDataOutput -> ModLanguageProvider(output, "en_us") }
+		pack.addProvider { output: FabricDataOutput -> ModLanguageProvider(output, "ko_kr") }
 		pack.addProvider { output: FabricDataOutput -> ModBlockLootTableProvider(output) }
 		pack.addProvider { output: FabricDataOutput, registriesFuture -> ModBlockTagProvider(output, registriesFuture) }
 	}

@@ -1,6 +1,6 @@
 package com.rhseung.abstractlib.data
 
-import com.rhseung.abstractlib.api.URI
+import com.rhseung.abstractlib.api.file.URI
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.block.Block
 import net.minecraft.registry.RegistryKeys
@@ -16,6 +16,7 @@ class BlockTagHandler(
         val needs_stone_tool = URI("needs_stone_tool")
         val needs_iron_tool = URI("needs_iron_tool")
         val needs_diamond_tool = URI("needs_diamond_tool")
+        val sword = URI("sword")
         val hoe = URI("hoe")
         val pickaxe = URI("pickaxe")
         val axe = URI("axe")

@@ -38,3 +38,5 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
+/src/main/kotlin/com/rhseung/abstractlib/init/example/
+/src/main/kotlin/com/rhseung/abstractlib/data/example/

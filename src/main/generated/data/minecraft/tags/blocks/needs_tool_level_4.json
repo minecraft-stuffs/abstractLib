@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "abstractlib:block_1",
     "abstractlib:block_5"
   ]
 }

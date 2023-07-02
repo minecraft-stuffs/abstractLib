@@ -1,7 +1,7 @@
-package com.rhseung.abstractlib.init
+package com.rhseung.abstractlib.registration
 
-import com.rhseung.abstractlib.api.Location
-import com.rhseung.abstractlib.api.Translation
+import com.rhseung.abstractlib.api.file.Location
+import com.rhseung.abstractlib.api.StringStyle.titlecase
 import net.minecraft.item.Item
 
 class BasicItem(
@@ -10,9 +10,8 @@ class BasicItem(
 ) : Item(setting), IBasicRegistryKey {
     constructor(loc: Location) : this(loc, Settings())
 
-    override var translationName = Translation(
-        en_us = id.path.lowercase().split("_").joinToString(" ") { it.replaceFirstChar { it.titlecase() } },
-        ko_kr = ""
+    override var translationName = mutableMapOf(
+        "en_us" to id.path.titlecase()
     )
 
     override fun toString(): String {
