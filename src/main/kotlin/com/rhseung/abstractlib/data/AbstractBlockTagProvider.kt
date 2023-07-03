@@ -2,8 +2,9 @@ package com.rhseung.abstractlib.data
 
 import com.rhseung.abstractlib.api.MiningLevel
 import com.rhseung.abstractlib.api.ToolType
-import com.rhseung.abstractlib.api.file.URI.Companion.div
+import com.rhseung.abstractlib.api.file.Path.Companion.div
 import com.rhseung.abstractlib.data.BlockTagHandler.Companion.mineable
+import com.rhseung.abstractlib.data.BlockTagHandler.Companion.needs_diamond_tool
 import com.rhseung.abstractlib.data.BlockTagHandler.Companion.needs_iron_tool
 import com.rhseung.abstractlib.data.BlockTagHandler.Companion.needs_stone_tool
 import com.rhseung.abstractlib.registration.BasicBlock
@@ -23,20 +24,17 @@ abstract class AbstractBlockTagProvider(
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         val handler = BlockTagHandler(output.modId, this)
 
-        // todo: first, second 말고 data class로 변경
         Register.getBlocks(BasicBlock::class).forEach { block ->
-            when (block.requiresTool.first) {
+            when (block.requiresTool.miningLevel) {
                 MiningLevel.STONE -> getOrCreateTagBuilder(handler.getVanilia(needs_stone_tool)).add(block)
                 MiningLevel.IRON -> getOrCreateTagBuilder(handler.getVanilia(needs_iron_tool)).add(block)
-                MiningLevel.DIAMOND -> getOrCreateTagBuilder(handler.getVanilia(needs_iron_tool)).add(block)
-                else -> {
-                    if (block.requiresTool.first > MiningLevel.DIAMOND)
-                        getOrCreateTagBuilder(handler.getVanilia("needs_tool_level_${block.requiresTool.first.level}")).add(block)
-                }
+                MiningLevel.DIAMOND -> getOrCreateTagBuilder(handler.getVanilia(needs_diamond_tool)).add(block)
+                else -> if (block.requiresTool.miningLevel > MiningLevel.DIAMOND)
+                    getOrCreateTagBuilder(handler.getVanilia("needs_tool_level_${block.requiresTool.miningLevel.toInt()}")).add(block)
             }
 
-            if (block.requiresTool.second != ToolType.ANY)
-                getOrCreateTagBuilder(handler.getVanilia(mineable/block.requiresTool.second.name)).add(block)
+            if (block.requiresTool.toolType != ToolType.ANY)
+                getOrCreateTagBuilder(handler.getVanilia(mineable/block.requiresTool.toolType.name)).add(block)
         }
     }
 

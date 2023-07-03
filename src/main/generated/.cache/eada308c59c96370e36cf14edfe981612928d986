@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-02T18:39:05.1477007	AbstractLib/Model Definitions
+// 1.20.1	2023-07-03T23:40:54.164578	AbstractLib/Model Definitions
 b9a0fca14878d8bdbfaae864dd3f7dd41aaadfb4 assets\abstractlib\models\block\block_3.json
 73d14e08b43dda0120ebadd6b9f03fe7baf7dde8 assets\abstractlib\models\item\block_2.json
 d030485dec01de33f6d3d5bef3223615e8c6a8da assets\abstractlib\blockstates\block_3.json
@@ -6,10 +6,10 @@ bf0ccfac211ee36b1c42372f76b657f4b903edf0 assets\abstractlib\models\item\brass_in
 909862c126c84f332d114a0ebc2d4c28ea2e1766 assets\abstractlib\blockstates\block_2.json
 8d152f379990aa0b7dbd97da399deea0f9ce1b90 assets\abstractlib\models\block\block_5.json
 f9cce8d8a52d39f45b8b6e65f83b962eaf7f0d3a assets\abstractlib\models\block\block_2.json
-5bfa7e7df856699ce8e514293fa6cc806a1b2514 assets\abstractlib\blockstates\block_5.json
 cb8096446fe3b947c2cad143f3cc9c03ca50df7e assets\abstractlib\models\item\block_1.json
-148254d294ff626f9c20a019d2561323398d2687 assets\abstractlib\models\item\block_4.json
+5bfa7e7df856699ce8e514293fa6cc806a1b2514 assets\abstractlib\blockstates\block_5.json
 2d5e542ef2cbfdfdbda3e49d1b8d1c0341a06363 assets\abstractlib\blockstates\block_4.json
+148254d294ff626f9c20a019d2561323398d2687 assets\abstractlib\models\item\block_4.json
 62a5490fc18766ec3996ed2c10b9918bcccbe3ec assets\abstractlib\models\block\block_4.json
 ff48fb8716cede929166bccfe1ec69c0a1dc6092 assets\abstractlib\models\item\block_3.json
 78e516bd549c6b240ed8b8fc04ce6ef95b766a69 assets\abstractlib\models\block\block_1.json

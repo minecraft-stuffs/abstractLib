@@ -1,8 +1,10 @@
 package com.rhseung.abstractlib.api
 
 data class MiningLevel(
-    val level: Int
+    private val level: Int
 ) {
+
+    fun toInt(): Int = level
 
     companion object {
         val WOOD = MiningLevel(0)

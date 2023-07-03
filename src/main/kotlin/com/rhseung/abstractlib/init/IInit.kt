@@ -8,11 +8,12 @@ interface IInit {
     fun register() {
         this::class.java.declaredFields.filter { it.name != "INSTANCE" }.forEach { field ->
             field.isAccessible = true
-            field.annotations.forEach { when (it) {
-                is en_us -> (field.get(this) as IBasicRegistryKey).translationName["en_us"] = it.value
-                is ko_kr -> (field.get(this) as IBasicRegistryKey).translationName["ko_kr"] = it.value
-                // todo: 다국어 지원
-            } }
+            field.annotations.forEach { annotation ->
+                if (Regex("[a-z]{2}_[a-z]{2}").find(annotation::class.simpleName!!) != null) {  // 언어 코드인지 확인
+                    (field.get(this) as IBasicRegistryKey).translationName[annotation::class] =
+                        annotation::class.java.getMethod("value").invoke(annotation) as String
+                }
+            }
         }
     }
 }

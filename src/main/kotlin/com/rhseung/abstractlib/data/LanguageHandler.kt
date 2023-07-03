@@ -44,9 +44,9 @@ class LanguageHandler(
 //        translationBuilder.add(new.first, new.second)
 //    }
 //
-//    fun add(new: Pair<RegistryKey<ItemGroup>, String>) {
-//        translationBuilder.add(new.first, new.second)
-//    }
+    fun addItemGroup(new: Pair<RegistryKey<ItemGroup>, String>) {
+        translationBuilder.add(new.first, new.second)
+    }
 //
 //    fun add(new: Pair<StatusEffect, String>) {
 //        translationBuilder.add(new.first, new.second)

@@ -139,7 +139,6 @@ class Color {
         fun hsv(h: Int, s: Float, v: Float) = Color(h, s, v)
     }
 
-    // toHex
     fun toInt(): Int {
         return Integer.parseInt(
             Integer.toHexString(1 shl 24 or (R shl 16) or (G shl 8) or B).substring(1), 16
