@@ -20,7 +20,6 @@ import net.minecraft.text.Text
 
 object ModInit : IInit {
     @ko_kr("예제 아이템 그룹")
-    @en_us("example item group")
     val EXAMPLE_ITEM_GROUP = itemGroup("example_item_group") {
         icon = ItemStack(Items.NETHERITE_PICKAXE)
     }

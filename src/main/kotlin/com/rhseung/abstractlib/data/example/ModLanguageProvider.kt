@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 
 class ModLanguageProvider(
     override val output: FabricDataOutput,
-    override val languageCode: String
+    override val languageCode: KClass<*>
 ) : AbstractLanguageProvider(output, languageCode) {
 
 }

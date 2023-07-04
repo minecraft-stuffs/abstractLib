@@ -11,7 +11,7 @@ import java.io.File
 object Mod : ModInitializer {
 	val modId: String = "abstractlib"
 	
-	/**
+	/** todo: automatically get modId from fabric.mod.json
 	 * JsonParser.parseString(
 	 * 		File("/src/main/resources/fabric.mod.json").readText()
 	 * 	).asJsonObject.get("id").asString

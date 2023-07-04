@@ -1,6 +1,7 @@
 package com.rhseung.abstractlib.data
 
 import com.rhseung.abstractlib.api.annotation.en_us
+import com.rhseung.abstractlib.api.utility.ErrorSolver.npe
 import com.rhseung.abstractlib.init.example.ModInit
 import com.rhseung.abstractlib.registration.BasicBlock
 import com.rhseung.abstractlib.registration.BasicItem
@@ -14,8 +15,8 @@ import kotlin.reflect.KClass
 
 abstract class AbstractLanguageProvider(
     open val output: FabricDataOutput,
-    open val languageCode: String
-) : FabricLanguageProvider(output, languageCode) {
+    open val languageCode: KClass<*>
+) : FabricLanguageProvider(output, languageCode.simpleName!!) {
 
     override fun generateTranslations(translationBuilder: TranslationBuilder) {
         val handler = LanguageHandler(output.modId, translationBuilder)
@@ -24,21 +25,19 @@ abstract class AbstractLanguageProvider(
 
     open fun register(handler: LanguageHandler) {
         // items auto generated
-        Register.getItems(BasicItem::class).forEach { item -> when (languageCode) {
-                "en_us" -> handler.addItem(item to item.translationName[en_us::class]!!)
-                "ko_kr" -> handler.addItem(item to item.translationName[en_us::class]!!)
-                else -> error("Unsupported language code: $languageCode")
-//            handler.addItem(item to (item.translationName[languageCode] ?: item.translationName[en_us::class]!!))
-            }
+        Register.getItems(BasicItem::class).forEach {
+            handler.addItem(
+                it to (it.translationName[languageCode]
+                ?: it.translationName[en_us::class]!!)
+            )
         }
 
         // blocks auto generated
-        Register.getBlocks(BasicBlock::class).forEach { block -> when (languageCode) {
-                "en_us" -> handler.addBlock(block to block.translationName[en_us::class]!!)
-                "ko_kr" -> handler.addBlock(block to block.translationName[en_us::class]!!)
-                else -> error("Unsupported language code: $languageCode")
-//            handler.addBlock(block to (block.translationName[languageCode] ?: block.translationName[en_us::class]!!))
-            }
+        Register.getBlocks(BasicBlock::class).forEach {
+            handler.addBlock(
+                it to (it.translationName[languageCode]
+                    ?: it.translationName[en_us::class]!!)
+            )
         }
         
         // itemGroups auto generated
@@ -53,8 +52,8 @@ abstract class AbstractLanguageProvider(
         handler.addItemGroup(
         ModInit.EXAMPLE_ITEM_GROUP.registry
             to
-//            (ModInit.EXAMPLE_ITEM_GROUP.translationName[languageCode] ?: ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class]!!)
-                (ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class] ?: ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class]!!)
+            (ModInit.EXAMPLE_ITEM_GROUP.translationName[languageCode] ?: ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class]!!)
+//                (ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class] ?: ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class]!!)
         )
     }
 }

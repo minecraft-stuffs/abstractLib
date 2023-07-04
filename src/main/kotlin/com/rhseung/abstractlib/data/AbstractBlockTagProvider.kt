@@ -39,6 +39,6 @@ abstract class AbstractBlockTagProvider(
     }
 
     open fun register(handler: BlockTagHandler) {
-        // todo: handler를 어떻게 구현해야하나
+        // todo: handler 구현
     }
 }
