@@ -1,9 +1,5 @@
 {
   "abstractlib.example_item_group": "Example Item Group",
   "block.abstractlib.block_1": "Block 1",
-  "block.abstractlib.block_2": "Block 2",
-  "block.abstractlib.block_3": "Block 3",
-  "block.abstractlib.block_4": "Block 4",
-  "block.abstractlib.block_5": "Block 5",
   "item.abstractlib.brass_ingot": "Brass Ingot"
 }

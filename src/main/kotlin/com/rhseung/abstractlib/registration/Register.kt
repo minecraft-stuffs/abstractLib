@@ -20,17 +20,19 @@ import net.minecraft.text.Text
 import kotlin.reflect.KClass
 
 object Register {
-    fun item(name: String, lambda: ItemBuilder.() -> Unit): BasicItem {
-        return ItemBuilder(Location(Mod.modId, name)).apply(lambda).build()
+    infix fun String.of(modId: String) = Location(modId, this)
+    
+    fun item(loc: Location, lambda: ItemBuilder.() -> Unit): BasicItem {
+        return ItemBuilder(loc).apply(lambda).build()
     }
 
-    fun block(name: String, lambda: BlockBuilder.() -> Unit): BasicBlock {
-        return BlockBuilder(Location(Mod.modId, name)).apply(lambda).build()
+    fun block(loc: Location, lambda: BlockBuilder.() -> Unit): BasicBlock {
+        return BlockBuilder(loc).apply(lambda).build()
     }
     
     // note: item group은 item, block과 달리 생성자가 private이라서 상속이 힘들어 BasicItemGroup가 굉장히 모호한 클래스임
-    fun itemGroup(name: String, lambda: ItemGroupBuilder.() -> Unit): BasicItemGroup {
-        return ItemGroupBuilder(Location(Mod.modId, name)).apply(lambda).build()
+    fun itemGroup(loc: Location, lambda: ItemGroupBuilder.() -> Unit): BasicItemGroup {
+        return ItemGroupBuilder(loc).apply(lambda).build()
     }
 
     class ItemBuilder(val loc: Location) {
