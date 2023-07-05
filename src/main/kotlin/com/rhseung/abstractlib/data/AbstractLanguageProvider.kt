@@ -41,7 +41,6 @@ abstract class AbstractLanguageProvider(
         }
         
         // itemGroups auto generated
-        // todo: BasicItemGroup의 보완이 시급함
 //        Register.getItemGroups().forEach { itemGroup ->
 //            handler.addItemGroup(
 //                RegistryKey.of(RegistryKeys.ITEM_GROUP, Registries.ITEM_GROUP.getId(itemGroup))
@@ -49,11 +48,13 @@ abstract class AbstractLanguageProvider(
 //                    (itemGroup.translationName[languageCode] ?: itemGroup.translationName[en_us::class]!!)
 //            )
 //        }
-        handler.addItemGroup(
-        ModInit.EXAMPLE_ITEM_GROUP.registry
-            to
-            (ModInit.EXAMPLE_ITEM_GROUP.translationName[languageCode] ?: ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class]!!)
-//                (ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class] ?: ModInit.EXAMPLE_ITEM_GROUP.translationName[en_us::class]!!)
-        )
+        
+        // todo: BasicItemGroup의 보완이 시급함
+//        Register.getItemGroups().forEach {
+//            handler.addItemGroup(
+//                it to (it.translationName[languageCode]
+//                    ?: it.translationName[en_us::class]!!)
+//            )
+//        }
     }
 }
