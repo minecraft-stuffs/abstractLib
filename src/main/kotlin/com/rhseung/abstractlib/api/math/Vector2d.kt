@@ -45,7 +45,7 @@ data class Vector2d(val x: Int, val y: Int) {
         return sqrt((x * x + y * y).toFloat())
     }
 
-    fun dist(other: Vector2d): Float {
+    operator fun rangeTo(other: Vector2d): Float {
         return (this - other).abs()
     }
 }

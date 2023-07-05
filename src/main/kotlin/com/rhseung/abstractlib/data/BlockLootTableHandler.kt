@@ -182,7 +182,7 @@ class BlockLootTableHandler(
 
         fun build(): LootPool.Builder {
             // todo: applyExplosionDecay
-            // todo: 내부 코드 뜯어서 다 호환시키기
+            //  - 내부 코드 뜯어서 다 호환시키기
 
             var pool = LootPool.builder().rolls(ConstantLootNumberProvider.create(rolls.toFloat()))
 

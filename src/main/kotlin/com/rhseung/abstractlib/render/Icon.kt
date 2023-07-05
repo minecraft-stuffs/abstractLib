@@ -1,9 +1,9 @@
 package com.rhseung.abstractlib.render
 
-import com.rhseung.abstractlib.api.file.Path.Companion.div
-import com.rhseung.abstractlib.api.file.Path.Companion.gui
-import com.rhseung.abstractlib.api.file.Path.Companion.icon
-import com.rhseung.abstractlib.api.file.Path.Companion.textures
+import com.rhseung.abstractlib.api.file.URI.Companion.div
+import com.rhseung.abstractlib.api.file.URI.Companion.gui
+import com.rhseung.abstractlib.api.file.URI.Companion.icon
+import com.rhseung.abstractlib.api.file.URI.Companion.textures
 import com.rhseung.abstractlib.api.math.Size2d
 import com.rhseung.abstractlib.api.math.Vector2d
 import kotlin.math.floor

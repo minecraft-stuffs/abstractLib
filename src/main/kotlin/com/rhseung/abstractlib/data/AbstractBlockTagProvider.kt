@@ -2,7 +2,7 @@ package com.rhseung.abstractlib.data
 
 import com.rhseung.abstractlib.api.MiningLevel
 import com.rhseung.abstractlib.api.ToolType
-import com.rhseung.abstractlib.api.file.Path.Companion.div
+import com.rhseung.abstractlib.api.file.URI.Companion.div
 import com.rhseung.abstractlib.data.BlockTagHandler.Companion.mineable
 import com.rhseung.abstractlib.data.BlockTagHandler.Companion.needs_diamond_tool
 import com.rhseung.abstractlib.data.BlockTagHandler.Companion.needs_iron_tool
