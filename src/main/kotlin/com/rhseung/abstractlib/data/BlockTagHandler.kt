@@ -1,6 +1,6 @@
 package com.rhseung.abstractlib.data
 
-import com.rhseung.abstractlib.api.file.URI
+import com.rhseung.abstractlib.api.file.path.URI
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.block.Block
 import net.minecraft.registry.RegistryKeys
@@ -24,7 +24,7 @@ class BlockTagHandler(
     }
 
     fun get(uri: URI): TagKey<Block> {
-        return TagKey.of(RegistryKeys.BLOCK, Identifier(modId, uri.path))
+        return TagKey.of(RegistryKeys.BLOCK, Identifier(modId, uri.toString()))
     }
 
     fun get(path: String): TagKey<Block> {
@@ -32,7 +32,7 @@ class BlockTagHandler(
     }
 
     fun getVanilia(uri: URI): TagKey<Block> {
-        return TagKey.of(RegistryKeys.BLOCK, Identifier("minecraft", uri.path))
+        return TagKey.of(RegistryKeys.BLOCK, Identifier("minecraft", uri.toString()))
     }
 
     fun getVanilia(path: String): TagKey<Block> {

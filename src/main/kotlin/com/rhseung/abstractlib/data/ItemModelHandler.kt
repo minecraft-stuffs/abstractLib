@@ -5,6 +5,8 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.rhseung.abstractlib.api.file.Parents
 import com.rhseung.abstractlib.api.file.TextureType
+import com.rhseung.abstractlib.api.file.path.Location
+import com.rhseung.abstractlib.api.file.path.URI
 import com.rhseung.abstractlib.registration.BasicItem
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.util.Identifier
@@ -15,9 +17,9 @@ class ItemModelHandler(
     val modId: String,
     val generator: ItemModelGenerator
 ) {
-    fun simple(item: BasicItem, path: String = item.id.path) {
+    fun simple(basicItem: BasicItem, path: String = basicItem.id.path) {
         this.generate(builder {
-            model(item.id.path) {
+            model(basicItem.id.path) {
                 parent { Parents.GENERATED }
                 textures {
                     + path
@@ -26,12 +28,12 @@ class ItemModelHandler(
         })
     }
 
-    data class Model(val id: Identifier, var parent: Identifier, val textures: MutableList<Texture>)
+    data class Model(val id: Identifier, var parent: URI, val textures: MutableList<Texture>)
 
     data class Texture(var type: String, val id: Identifier)
 
     data class Override(val predicates: MutableMap<Identifier, Number>, val model: Model)
-
+    
     /**
      * ```
      * // registry id = reimagined:gear/hoe
@@ -60,9 +62,34 @@ class ItemModelHandler(
      *   }
      * }
      * ```
-     * ->
+     *
      * ```
-     * handler.builder
+     * handler.builder {
+     * 	model("gear/hoe") {
+     * 		parent { Parents.HANDHELD }
+     * 		textures {
+     * 		    + "gear/hoe/handle"
+     * 			+ "gear/hoe/hoehead"
+     * 		    + "gear/hoe/binding"
+     * 		}
+     * 	}
+     * 	overrides {
+     * 		override {
+     * 			predicate { "broken" to 1 }
+     * 			model("gear/hoe_broken") {
+     * 				parent {...}
+     * 				textures {...}
+     * 			}
+     * 		}
+     * 		override {
+     * 			predicate { "grip" to 1 }
+     * 			model("gear/hoe_grip") {
+     * 				parent {...}
+     * 				textures {...}
+     * 			}
+     * 		}
+     * 	}
+     * }
      * ```
      */
     fun builder(lambda: Builder.() -> Unit): Builder {
@@ -98,7 +125,7 @@ class ItemModelHandler(
         private var parent = Parents.EMPTY
         private val textures = mutableListOf<Texture>()
 
-        fun parent(lambda: () -> Identifier): ModelBuilder {
+        fun parent(lambda: () -> URI): ModelBuilder {
             parent = lambda()
             return this
         }
@@ -115,7 +142,9 @@ class ItemModelHandler(
         private val textureList = mutableListOf<Texture>()
 
         operator fun String.unaryPlus() {
-            textureList.add(Texture(TextureType.LAYER(textureList.count()), Identifier(modId, "item/$this")))
+            textureList.add(
+                Texture(TextureType.LAYER(textureList.count()), Identifier(modId, "item/$this"))
+            )
         }
 
         operator fun Pair<String, String>.unaryPlus() {
@@ -154,7 +183,10 @@ class ItemModelHandler(
     class OverrideBuilder(val modId: String) {
         var predicates = mutableMapOf<Identifier, Number>()
         lateinit var model: Model
-
+        
+        /**
+         * 주의: `predicate`는 여러 번 사용할 수 있다.
+         */
         fun predicate(lambda: () -> Pair<String, Number>): OverrideBuilder {
             this.predicates[Identifier(modId, lambda().first)] = lambda().second
             return this
@@ -183,7 +215,7 @@ class ItemModelHandler(
         this.accept(builder.model.id, Supplier {
             val jsonObject = JsonObject()
 
-            jsonObject.addProperty("parent", builder.model.parent.toString())
+            jsonObject.addProperty("parent", Location(builder.model.parent.toString()).toString())
 
             if (builder.model.textures.isNotEmpty()) {
                 val textureJsonObject = JsonObject()

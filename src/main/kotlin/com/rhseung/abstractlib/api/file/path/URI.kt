@@ -1,13 +1,17 @@
-package com.rhseung.abstractlib.api.file
+package com.rhseung.abstractlib.api.file.path
 
+// note: 언젠가 모든 [Location]을 교체할 놈
 data class URI(
-    val path: String
+    val paths: List<String> = listOf()
 ) {
+    constructor(vararg paths: String): this(paths.toList())
+    
     companion object {
-        operator fun URI.div(other: URI) = URI("${this.path}/${other.path}")
-        operator fun URI.div(other: String) = URI("${this.path}/$other")
-        operator fun String.div(other: URI) = URI("$this/${other.path}")
+        operator fun URI.div(other: URI) = URI(paths + other.paths)
+        operator fun URI.div(other: String) = URI(paths + other)
+        operator fun String.div(other: URI) = URI(listOf(this) + other.paths)
         
+        val root = URI("")
         // fixme: this is not working
 //        val modid = Path(JsonParser.parseString(
 //            File("/src/main/resources/fabric.mod.json").readText()
@@ -29,5 +33,11 @@ data class URI(
 
         val block = URI("block")
         val item = URI("item")
+    }
+    
+    override fun toString() = paths.joinToString("/")
+    
+    fun into(execute: (String) -> Unit) {
+        paths.forEach(execute)
     }
 }

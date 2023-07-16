@@ -1,4 +1,5 @@
 package com.rhseung.abstractlib.api.annotation
 
-@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.SOURCE)
+@Target(AnnotationTarget.EXPRESSION, AnnotationTarget.LOCAL_VARIABLE)
 annotation class en_us(val value: String)

@@ -1,16 +1,10 @@
 package com.rhseung.abstractlib.data
 
 import com.rhseung.abstractlib.api.annotation.en_us
-import com.rhseung.abstractlib.api.utility.ErrorSolver.npe
-import com.rhseung.abstractlib.init.example.ModInit
 import com.rhseung.abstractlib.registration.BasicBlock
 import com.rhseung.abstractlib.registration.BasicItem
-import com.rhseung.abstractlib.registration.Register
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
-import net.minecraft.registry.Registries
-import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.RegistryKeys
 import kotlin.reflect.KClass
 
 abstract class AbstractLanguageProvider(
@@ -50,11 +44,12 @@ abstract class AbstractLanguageProvider(
 //        }
         
         // todo: BasicItemGroup의 보완이 시급함
-//        Register.getItemGroups().forEach {
-//            handler.addItemGroup(
-//                it to (it.translationName[languageCode]
-//                    ?: it.translationName[en_us::class]!!)
-//            )
-//        }
+        // todo: handler.add[Type] 이런 형식의 builder 원하지 않습니다..
+        Register.getGroups().forEach {
+            handler.addItemGroup(
+                it to (it.translationName[languageCode]
+                    ?: it.translationName[en_us::class]!!)
+            )
+        }
     }
 }
