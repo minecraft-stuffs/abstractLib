@@ -1,8 +1,11 @@
-package com.rhseung.abstractlib.init
+package com.rhseung.abstractlib.registration
 
 import com.rhseung.abstractlib.api.ToolType
 import com.rhseung.abstractlib.api.file.path.Location
-import com.rhseung.abstractlib.registration.*
+import com.rhseung.abstractlib.registration.key.BasicBlock
+import com.rhseung.abstractlib.registration.key.BasicItem
+import com.rhseung.abstractlib.registration.key.BasicItemGroup
+import com.rhseung.abstractlib.registration.key.Group
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.minecraft.block.AbstractBlock
@@ -94,9 +97,9 @@ object Register {
 				}
 			
 			var requireLevel: ToolLevel
-				get() = block.requireLevel
+				get() = block.requiredToolLevel
 				set(value) {
-					block.requireLevel = value
+					block.requiredToolLevel = value
 				}
 			
 			fun build(): BasicBlock {
@@ -155,5 +158,17 @@ object Register {
 				return ret
 			}
 		}
+	}
+	
+	fun loopItem(iteratee: (BasicItem) -> Unit) {
+		Item.ITEM.forEach(iteratee)
+	}
+	
+	fun loopBlock(iteratee: (BasicBlock) -> Unit) {
+		Block.BLOCK.forEach(iteratee)
+	}
+	
+	fun loopItemGroup(iteratee: (BasicItemGroup) -> Unit) {
+		ItemGroup.ITEM_GROUP.forEach(iteratee)
 	}
 }

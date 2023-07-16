@@ -1,6 +1,6 @@
 package com.rhseung.abstractlib.api
 
-import com.rhseung.abstractlib.api.file.Nbt
+import com.rhseung.abstractlib.registration.Nbt
 import com.rhseung.abstractlib.api.file.path.URI
 import net.minecraft.item.ItemStack
 

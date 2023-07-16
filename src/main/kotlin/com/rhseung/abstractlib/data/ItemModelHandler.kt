@@ -7,7 +7,7 @@ import com.rhseung.abstractlib.api.file.Parents
 import com.rhseung.abstractlib.api.file.TextureType
 import com.rhseung.abstractlib.api.file.path.Location
 import com.rhseung.abstractlib.api.file.path.URI
-import com.rhseung.abstractlib.registration.BasicItem
+import com.rhseung.abstractlib.registration.key.BasicItem
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.util.Identifier
 import java.util.function.BiConsumer

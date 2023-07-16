@@ -1,10 +1,10 @@
-package com.rhseung.abstractlib.init
+package com.rhseung.abstractlib.registration
 
 import com.rhseung.abstractlib.api.utility.ErrorSolver.npe
-import com.rhseung.abstractlib.registration.IBasicKey
+import com.rhseung.abstractlib.registration.key.IBasicKey
 import kotlin.reflect.full.declaredMemberProperties
 
-interface IInit {
+interface IModInit {
     fun register() {
         this::class.java.declaredFields.filter { it.name != "INSTANCE" }.forEach { field ->
             field.isAccessible = true

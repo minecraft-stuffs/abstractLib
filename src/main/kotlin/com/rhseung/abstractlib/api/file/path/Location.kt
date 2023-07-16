@@ -13,7 +13,7 @@ class Location(
     override fun toString(): String {
         return "$namespace:$path"
     }
-
+    
     companion object {
         fun Location.with(change: (String) -> String) = Location(namespace, change(path))
         operator fun Location.plus(postfix: String) = this.with { it + postfix }

@@ -1,4 +1,4 @@
-package com.rhseung.abstractlib.registration
+package com.rhseung.abstractlib.registration.key
 
 import kotlin.reflect.KClass
 

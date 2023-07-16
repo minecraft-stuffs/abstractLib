@@ -1,15 +1,15 @@
-package com.rhseung.abstractlib.registration
+package com.rhseung.abstractlib.registration.key
 
-import com.rhseung.abstractlib.api.file.path.Location
 import com.rhseung.abstractlib.api.StringStyle.titlecase
 import com.rhseung.abstractlib.api.annotation.en_us
+import com.rhseung.abstractlib.api.file.path.Location
 import net.minecraft.item.ItemGroup
 import net.minecraft.registry.RegistryKey
 import kotlin.reflect.KClass
 
 typealias Group = RegistryKey<ItemGroup>
 
-class BasicItemGroup(
+open class BasicItemGroup(
 	val id: Location,
 	var registry: RegistryKey<ItemGroup>,
 	var group: ItemGroup

@@ -1,4 +1,4 @@
-package com.rhseung.abstractlib.init
+package com.rhseung.abstractlib.registration
 
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -24,7 +24,7 @@ abstract class AbstractModInit(
 			Registry.register(Registries.ITEM_GROUP, itemGroup.registry, itemGroup.group)
 		}
 		
-		// todo: ‼️reflection to language annotation
+		// todo: reflection to language annotation
 	}
 	
 	open fun register(item: Register.Item, block: Register.Block, itemGroup: Register.ItemGroup) {}

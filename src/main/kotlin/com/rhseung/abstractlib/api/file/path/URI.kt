@@ -10,12 +10,19 @@ data class URI(
         operator fun URI.div(other: URI) = URI(paths + other.paths)
         operator fun URI.div(other: String) = URI(paths + other)
         operator fun String.div(other: URI) = URI(listOf(this) + other.paths)
+        operator fun URI.rangeTo(other: URI) = Location(this.toString(), other.toString())
         
         val root = URI("")
-        // fixme: this is not working
-//        val modid = Path(JsonParser.parseString(
-//            File("/src/main/resources/fabric.mod.json").readText()
-//        ).asJsonObject.get("id").asString)
+        val minecraft = URI("minecraft")
+        
+        /** todo: automatically get modId from fabric.mod.json
+         * val modid = URI(JsonParser.parseString(
+         * 		File("/src/main/resources/fabric.mod.json").readText()
+         * 	).asJsonObject.get("id").asString)
+         *
+         * 	이 코드 작동 안하는 이유: 컴파일 타임에는 위치가 /run/...에 있기 때문에
+         */
+        
         val assets = URI("assets")
             val blockstates = URI("blockstates")
             val lang = URI("lang")

@@ -1,10 +1,11 @@
-package com.rhseung.abstractlib.registration
+package com.rhseung.abstractlib.registration.key
 
-import com.rhseung.abstractlib.api.file.path.Location
 import com.rhseung.abstractlib.api.MiningLevel
 import com.rhseung.abstractlib.api.StringStyle.titlecase
 import com.rhseung.abstractlib.api.ToolType
 import com.rhseung.abstractlib.api.annotation.en_us
+import com.rhseung.abstractlib.api.file.path.Location
+import com.rhseung.abstractlib.registration.ToolLevel
 import com.rhseung.abstractlib.registration.ToolLevel.Companion.using
 import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
@@ -13,7 +14,7 @@ import kotlin.reflect.KClass
 
 open class BasicBlock(
 	val id: Location,
-	var requireLevel: ToolLevel,    // todo: auto tag mining level
+	var requiredToolLevel: ToolLevel,    // todo: auto generate mining level tag
 	var setting: Settings,
 ) : Block(setting), IBasicKey {
     constructor(loc: Location) : this(loc, MiningLevel.WOOD using ToolType.ANY, Settings.create())

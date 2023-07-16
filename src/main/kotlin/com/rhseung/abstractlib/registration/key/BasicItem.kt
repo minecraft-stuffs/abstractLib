@@ -1,8 +1,8 @@
-package com.rhseung.abstractlib.registration
+package com.rhseung.abstractlib.registration.key
 
-import com.rhseung.abstractlib.api.file.path.Location
 import com.rhseung.abstractlib.api.StringStyle.titlecase
 import com.rhseung.abstractlib.api.annotation.en_us
+import com.rhseung.abstractlib.api.file.path.Location
 import net.minecraft.item.Item
 import kotlin.reflect.KClass
 

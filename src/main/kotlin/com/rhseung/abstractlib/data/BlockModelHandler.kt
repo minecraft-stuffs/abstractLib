@@ -1,6 +1,6 @@
 package com.rhseung.abstractlib.data
 
-import com.rhseung.abstractlib.registration.BasicBlock
+import com.rhseung.abstractlib.registration.key.BasicBlock
 import net.minecraft.data.client.BlockStateModelGenerator
 
 class BlockModelHandler(

@@ -22,9 +22,14 @@ class BlockLootTableHandler(
     val modId: String,
     val generator: BlockLootTableGenerator
 ) {
+    fun <T: Block> adds(blocks: Collection<T>, iteratee: (T) -> Builder) {
+        blocks.forEach {
+            + iteratee(it)
+        }
+    }
 
-    fun drop(block: Block, drop: ItemConvertible) {
-        builder {
+    fun drop(block: Block, drop: ItemConvertible): Builder {
+        return builder {
             from { block }
             default {
                 drop { drop }
@@ -32,8 +37,8 @@ class BlockLootTableHandler(
         }
     }
 
-    fun dropSelf(block: Block) {
-        builder {
+    fun dropSelf(block: Block): Builder {
+        return builder {
             from { block }
             default {
                 drop { block }
@@ -41,8 +46,8 @@ class BlockLootTableHandler(
         }
     }
 
-    fun dropConditional(block: Block, drop: ItemConvertible, condition: LootCondition.Builder) {
-        builder {
+    fun dropConditional(block: Block, drop: ItemConvertible, condition: LootCondition.Builder): Builder {
+        return builder {
             from { block }
             case (condition) {
                 drop { drop }
@@ -50,16 +55,14 @@ class BlockLootTableHandler(
         }
     }
 
-    fun dropSilkTouch(block: Block, drop: ItemConvertible) {
-        this.dropConditional(block, drop, Condition.SILK_TOUCH)
-    }
+    fun dropSilkTouch(block: Block, drop: ItemConvertible): Builder
+        = this.dropConditional(block, drop, Condition.SILK_TOUCH)
 
-    fun dropShear(block: Block, drop: ItemConvertible) {
-        this.dropConditional(block, drop, Condition.SHEAR)
-    }
+    fun dropShear(block: Block, drop: ItemConvertible)
+        = this.dropConditional(block, drop, Condition.SHEAR)
 
-    fun dropOre(block: Block, drop: ItemConvertible) {
-        builder {
+    fun dropOre(block: Block, drop: ItemConvertible): Builder {
+        return builder {
             from { block }
             case (Condition.SILK_TOUCH) {
                 drop { block }
@@ -70,9 +73,12 @@ class BlockLootTableHandler(
             }
         }
     }
-
-    fun dropOre(block: Block, drop: Drop) {
-        builder {
+    
+    /**
+     * @param drop `Items.DIAMOND counts 3..5` 처럼 사용할 수 있습니다.
+     */
+    fun dropOre(block: Block, drop: Drop): Builder {
+        return builder {
             from { block }
             case (Condition.SILK_TOUCH) {
                 drop { block }
@@ -84,17 +90,14 @@ class BlockLootTableHandler(
         }
     }
 
-    fun dropOreLikeRedstone(block: Block, drop: ItemConvertible) {
-        this.dropOre(block, drop counts 4..5)
-    }
+    fun dropOreLikeRedstone(block: Block, drop: ItemConvertible): Builder
+        = this.dropOre(block, drop counts 4..5)
 
-    fun dropOreLikeLapis(block: Block, drop: ItemConvertible) {
-        this.dropOre(block, drop counts 4..9)
-    }
+    fun dropOreLikeLapis(block: Block, drop: ItemConvertible): Builder
+        = this.dropOre(block, drop counts 4..9)
 
-    fun dropOreLikeCopper(block: Block, drop: ItemConvertible) {
-        this.dropOre(block, drop counts 2..5)
-    }
+    fun dropOreLikeCopper(block: Block, drop: ItemConvertible): Builder
+        = this.dropOre(block, drop counts 2..5)
 
     object Condition {
         // todo: Condition Builder
@@ -124,13 +127,17 @@ class BlockLootTableHandler(
         infix fun LootCondition.Builder.and(builder: LootCondition.Builder): LootCondition.Builder {
             return this.and(builder)
         }
+        
+        operator fun Builder.unaryPlus() {
+            this.generator.addDrop(this.from, LootTable.builder().pools(this.pools.map { it.build() }))
+        }
     }
 
-    fun builder(block: Builder.() -> Unit) = Builder(generator).apply(block).build()
-
+    fun builder(block: Builder.() -> Unit): Builder = Builder(generator).apply(block)
+    
     class Builder(val generator: BlockLootTableGenerator) {
-        private val pools = mutableListOf<LootPool.Builder>()
-        private lateinit var from: Block
+        val pools = mutableListOf<LootPool.Builder>()
+        lateinit var from: Block
 
         fun from(lambda: () -> Block): Builder {
             from = lambda()
@@ -148,12 +155,9 @@ class BlockLootTableHandler(
             pools.add(PoolBuilder().apply(block).build())
             return this
         }
-
-        fun build() {
-            generator.addDrop(from, LootTable.builder().pools(pools.map { it.build() }))
-        }
     }
-
+    
+    // Pool은 전체 LootTable에서, 각각의 Case를 담당하는 구조라고 보면 됨
     class PoolBuilder {
         private lateinit var drop: Drop
         var condition: LootCondition.Builder? = null
@@ -181,7 +185,7 @@ class BlockLootTableHandler(
         }
 
         fun build(): LootPool.Builder {
-            // todo: applyExplosionDecay
+            // todo: applyExplosionDecay, etc...
             //  - 내부 코드 뜯어서 다 호환시키기
 
             var pool = LootPool.builder().rolls(ConstantLootNumberProvider.create(rolls.toFloat()))

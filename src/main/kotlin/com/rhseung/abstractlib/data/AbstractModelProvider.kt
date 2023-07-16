@@ -10,16 +10,16 @@ abstract class AbstractModelProvider(
 ) : FabricModelProvider(output) {
 
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-        val handler = BlockModelHandler(output.modId, blockStateModelGenerator)
-        registerBlock(handler)
+        val blockModel = BlockModelHandler(output.modId, blockStateModelGenerator)
+        registerBlock(blockModel)
     }
 
-    open fun registerBlock(handler: BlockModelHandler) {}
+    open fun registerBlock(blockModel: BlockModelHandler) {}
 
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
-        val handler = ItemModelHandler(output.modId, itemModelGenerator)
-        registerItem(handler)
+        val itemModel = ItemModelHandler(output.modId, itemModelGenerator)
+        registerItem(itemModel)
     }
 
-    open fun registerItem(handler: ItemModelHandler) {}
+    open fun registerItem(itemModel: ItemModelHandler) {}
 }

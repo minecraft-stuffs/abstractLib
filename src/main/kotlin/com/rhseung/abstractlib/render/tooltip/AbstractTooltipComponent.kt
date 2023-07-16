@@ -21,26 +21,6 @@ abstract class AbstractTooltipComponent(
     }
     
     open fun draw(handler: TooltipHandler) {
-        
-        /**
-         * todo: [TooltipHandler] 구현하면 바꾸기
-         * ```
-         * handler.draw(handler.builder {
-         *     case (EnchantmentScreen::class) {
-         *         "[Enchant] **Level** is ${data.enchantmentLevel}."
-         *     }
-         *     case (FurnaceScreen::class) {
-         *         + "[Fire] [Burn time] is ${data.burnTime} ticks.".putElement(Icon.FIRE, Color.RED)
-         *     }
-         *     default {
-         *         + "[Durability] [${data.currentDurability}][/${data.maxDurability}]"
-         *             .putElement(Icon.DURABILITY, Color.WHITE, Color.GRAY)
-         *         + "[Damage] [${data.damage}][/${data.maxDamage}]"
-         *             .putElement(Icon.DAMAGE, Color.WHITE, Color.GRAY)
-         *     }
-         * })
-         * ```
-         */
     }
 
     /**
