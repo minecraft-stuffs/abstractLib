@@ -10,16 +10,23 @@ import kotlin.math.floor
 
 class Icon(
 	val name: String,
-	val icon_size: Size2d,   // 각 아이콘의 크기
+	val iconSize: Size2d,   // 각 아이콘의 크기
 	private val variants: Int = 1
 ) {
-	val path = textures/gui/icon/name
-	val image_size = Size2d(icon_size.width * variants, icon_size.height) // variants를 모두 포함한 원본 사진 크기
+	val path = textures /gui /icon /name
+	val imageSize = Size2d(iconSize.width * variants, iconSize.height) // variants를 모두 포함한 원본 사진 크기
 	
-	fun index(ratio: Double) = if (ratio == 1.0) variants - 1 else floor(ratio * variants).toInt()
-	fun getUV(ratio: Double) = Vector2d(icon_size.width * index(ratio), 0)
+	private fun index(ratio: Double): Int {
+		check(ratio in 0.0..1.0)
+		
+		return when (ratio) {
+			1.0 -> variants - 1
+			else -> floor(ratio * variants).toInt()
+		}
+	}
+	operator fun get(ratio: Double) = Vector2d(iconSize.width * index(ratio), 0)
 	
-    // note: 이건 glance에서
+	// note: 이건 glance에서
 //	companion object {
 //		val ATTACK_DAMAGE = Icon("attack_damage", Size2d(9, 9))
 //		val ATTACK_SPEED = Icon("attack_speed", Size2d(9, 9))

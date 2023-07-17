@@ -12,7 +12,7 @@ open class BasicItem(
 ) : Item(setting), IBasicKey {
     constructor(loc: Location) : this(loc, Settings())
     
-    override var names = mutableMapOf<KClass<*>, String>(
+    override val names = mutableMapOf<KClass<*>, String>(
         en_us::class to id.path.titlecase()
     )
 

@@ -13,18 +13,20 @@ abstract class AbstractModInit(
 		
 		register(itemRegistry, blockRegistry, itemGroupRegistry)
 		
-		Register.Item.ITEM.forEach { item ->
+		Register.loopItem { item ->
 			Registry.register(Registries.ITEM, item.id, item)
 		}
-		Register.Block.BLOCK.forEach { block ->
+		Register.loopBlock { block ->
 			Registry.register(Registries.BLOCK, block.id, block)
-			Registry.register(Registries.ITEM, block.id, block.item)
+			Registry.register(Registries.ITEM, block.id, block.item)    // blockitem
 		}
-		Register.ItemGroup.ITEM_GROUP.forEach { itemGroup ->
+		Register.loopItemGroup { itemGroup ->
 			Registry.register(Registries.ITEM_GROUP, itemGroup.registry, itemGroup.group)
 		}
 		
 		// todo: reflection to language annotation
+		//  - 구조 상 로컬 변수는 런타임 시간에 만들어지므로, 리플렉션으로 얻어낼 수 없음
+		//  - 어케하지;
 	}
 	
 	open fun register(item: Register.Item, block: Register.Block, itemGroup: Register.ItemGroup) {}

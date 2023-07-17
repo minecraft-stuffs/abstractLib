@@ -14,7 +14,6 @@ import java.io.File
 
 object ModData : DataGeneratorEntrypoint {
 	override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
-		// debug
 //		val pack = fabricDataGenerator.createPack()
 //
 //		pack.addProvider { output: FabricDataOutput -> ModModelProvider(output) }

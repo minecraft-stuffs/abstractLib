@@ -14,7 +14,8 @@ open class BasicItemGroup(
 	var registry: RegistryKey<ItemGroup>,
 	var group: ItemGroup
 ) : IBasicKey {
-    override var names = mutableMapOf<KClass<*>, String>(
+	
+    override val names = mutableMapOf<KClass<*>, String>(
         en_us::class to id.path.titlecase()
     )
 

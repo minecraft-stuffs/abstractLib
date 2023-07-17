@@ -9,23 +9,37 @@ import com.rhseung.abstractlib.api.file.path.Location
 import com.rhseung.abstractlib.api.file.path.URI
 import com.rhseung.abstractlib.registration.key.BasicItem
 import net.minecraft.data.client.ItemModelGenerator
+import net.minecraft.item.Item
 import net.minecraft.util.Identifier
 import java.util.function.BiConsumer
 import java.util.function.Supplier
 
 class ItemModelHandler(
     val modId: String,
-    val generator: ItemModelGenerator
+    private val generator: ItemModelGenerator
 ) {
-    fun simple(basicItem: BasicItem, path: String = basicItem.id.path) {
-        this.generate(builder {
+    operator fun plusAssign(builder: Builder) {
+        generate(builder)
+    }
+    
+    operator fun plusAssign(builders: List<Builder>) {
+        builders.forEach(::generate)
+    }
+    
+    fun <T: Item> loop(items: Collection<T>, iteratee: (T) -> Builder) = items.map(iteratee)
+    
+    fun simple(basicItem: BasicItem, path: String = basicItem.id.path) =
+        builder {
             model(basicItem.id.path) {
                 parent { Parents.GENERATED }
                 textures {
                     + path
                 }
             }
-        })
+        }
+    
+    companion object {
+    
     }
 
     data class Model(val id: Identifier, var parent: URI, val textures: MutableList<Texture>)
@@ -34,64 +48,6 @@ class ItemModelHandler(
 
     data class Override(val predicates: MutableMap<Identifier, Number>, val model: Model)
     
-    /**
-     * ```
-     * // registry id = reimagined:gear/hoe
-     * // model id    = reimagined:item/gear/hoe
-     *
-     * {
-     *   "parent": "minecraft:item/handheld",
-     *   "overrides": [
-     *     {
-     *       "model": "reimagined:item/gear/hoe_broken",
-     *       "predicate": {
-     *         "reimagined:broken": 1
-     *       }
-     *     },
-     *     {
-     *       "model": "reimagined:item/gear/hoe_grip",
-     *       "predicate": {
-     *         "reimagined:grip": 1
-     *       }
-     *     }
-     *   ],
-     *   "textures": {
-     *     "layer0": "reimagined:item/gear/hoe/handle",
-     *     "layer1": "reimagined:item/gear/hoe/hoehead",
-     *     "layer2": "reimagined:item/gear/hoe/binding"
-     *   }
-     * }
-     * ```
-     *
-     * ```
-     * handler.builder {
-     * 	model("gear/hoe") {
-     * 		parent { Parents.HANDHELD }
-     * 		textures {
-     * 		    + "gear/hoe/handle"
-     * 			+ "gear/hoe/hoehead"
-     * 		    + "gear/hoe/binding"
-     * 		}
-     * 	}
-     * 	overrides {
-     * 		override {
-     * 			predicate { "broken" to 1 }
-     * 			model("gear/hoe_broken") {
-     * 				parent {...}
-     * 				textures {...}
-     * 			}
-     * 		}
-     * 		override {
-     * 			predicate { "grip" to 1 }
-     * 			model("gear/hoe_grip") {
-     * 				parent {...}
-     * 				textures {...}
-     * 			}
-     * 		}
-     * 	}
-     * }
-     * ```
-     */
     fun builder(lambda: Builder.() -> Unit): Builder {
         return Builder(modId).apply(lambda)
     }

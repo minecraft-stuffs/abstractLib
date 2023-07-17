@@ -21,7 +21,7 @@ open class BasicBlock(
     
     val item = BlockItem(this, Item.Settings())
     
-    override var names = mutableMapOf<KClass<*>, String>(
+    override val names = mutableMapOf<KClass<*>, String>(
         en_us::class to id.path.titlecase()
     )
 

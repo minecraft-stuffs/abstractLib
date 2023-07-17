@@ -19,110 +19,92 @@ class LanguageHandler(
 ) {
     data class Lang<T: Any>(val subject: T, val name: String)
     
-    fun <T: Item> adds(items: Collection<T>, iteratee: (T) -> String) {
-        items.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-    
-    fun <T: Block> adds(blocks: Collection<T>, iteratee: (T) -> String) {
-        blocks.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-    
-    fun <T: Identifier> adds(ids: Collection<T>, iteratee: (T) -> String) {
-        ids.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-    
-    fun adds(names: Collection<String>, iteratee: (String) -> String) {
-        names.forEach {
-            translationBuilder.add(Identifier(modId, it), iteratee(it))
-        }
-    }
-    
-    fun <T: Enchantment> adds(enchantments: Collection<T>, iteratee: (T) -> String) {
-        enchantments.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-    
-    fun <T: EntityType<*>> adds(entityTypes: Collection<T>, iteratee: (T) -> String) {
-        entityTypes.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-
-    fun <T: EntityAttribute> adds(entityAttributes: Collection<T>, iteratee: (T) -> String) {
-        entityAttributes.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-    
-    fun <T: BasicItemGroup> adds(itemGroups: Collection<T>, iteratee: (T) -> String) {
-        itemGroups.forEach {
-            translationBuilder.add(it.registry, iteratee(it))
-        }
-    }
-    
-    fun <T: RegistryKey<ItemGroup>> adds(itemGroups: Collection<T>, iteratee: (T) -> String) {
-        itemGroups.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-    
-    fun <T: StatusEffect> adds(statusEffects: Collection<T>, iteratee: (T) -> String) {
-        statusEffects.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-    
-    fun <T: StatType<*>> adds(statTypes: Collection<T>, iteratee: (T) -> String) {
-        statTypes.forEach {
-            translationBuilder.add(it, iteratee(it))
-        }
-    }
-    
     operator fun plusAssign(lang: Lang<Item>) {
         translationBuilder.add(lang.subject, lang.name)
+    }
+    
+    operator fun plusAssign(lang: List<Lang<Item>>) {
+        lang.forEach(::plusAssign)
     }
     
     operator fun plusAssign(lang: Lang<Block>) {
         translationBuilder.add(lang.subject, lang.name)
     }
     
+    operator fun plusAssign(lang: List<Lang<Block>>) {
+        lang.forEach(::plusAssign)
+    }
+    
     operator fun plusAssign(lang: Lang<Identifier>) {
         translationBuilder.add(lang.subject, lang.name)
+    }
+    
+    operator fun plusAssign(lang: List<Lang<Identifier>>) {
+        lang.forEach(::plusAssign)
     }
     
     operator fun plusAssign(lang: Lang<String>) {
         translationBuilder.add(Identifier(modId, lang.subject), lang.name)
     }
     
+    operator fun plusAssign(lang: List<Lang<String>>) {
+        lang.forEach(::plusAssign)
+    }
+    
     operator fun plusAssign(lang: Lang<Enchantment>) {
         translationBuilder.add(lang.subject, lang.name)
+    }
+    
+    operator fun plusAssign(lang: List<Lang<Enchantment>>) {
+        lang.forEach(::plusAssign)
     }
     
     operator fun plusAssign(lang: Lang<EntityType<*>>) {
         translationBuilder.add(lang.subject, lang.name)
     }
     
+    operator fun plusAssign(lang: List<Lang<EntityType<*>>>) {
+        lang.forEach(::plusAssign)
+    }
+    
     operator fun plusAssign(lang: Lang<EntityAttribute>) {
         translationBuilder.add(lang.subject, lang.name)
+    }
+    
+    operator fun plusAssign(lang: List<Lang<EntityAttribute>>) {
+        lang.forEach(::plusAssign)
     }
     
     operator fun plusAssign(lang: Lang<BasicItemGroup>) {
         translationBuilder.add(lang.subject.registry, lang.name)
     }
     
+    operator fun plusAssign(lang: List<Lang<BasicItemGroup>>) {
+        lang.forEach(::plusAssign)
+    }
+    
+    operator fun plusAssign(lang: Lang<RegistryKey<ItemGroup>>) {
+        translationBuilder.add(lang.subject, lang.name)
+    }
+    
+    operator fun plusAssign(lang: List<Lang<RegistryKey<ItemGroup>>>) {
+        lang.forEach(::plusAssign)
+    }
+    
     operator fun plusAssign(lang: Lang<StatusEffect>) {
         translationBuilder.add(lang.subject, lang.name)
     }
     
+    operator fun plusAssign(lang: List<Lang<StatusEffect>>) {
+        lang.forEach(::plusAssign)
+    }
+    
     operator fun plusAssign(lang: Lang<StatType<*>>) {
         translationBuilder.add(lang.subject, lang.name)
+    }
+    
+    operator fun plusAssign(lang: List<Lang<StatType<*>>>) {
+        lang.forEach(::plusAssign)
     }
     
     companion object {
@@ -134,7 +116,20 @@ class LanguageHandler(
         infix fun EntityType<*>.aka(name: String) = Lang(this, name)
         infix fun EntityAttribute.aka(name: String) = Lang(this, name)
         infix fun BasicItemGroup.aka(name: String) = Lang(this, name)
+        infix fun RegistryKey<ItemGroup>.aka(name: String) = Lang(this, name)
         infix fun StatusEffect.aka(name: String) = Lang(this, name)
         infix fun StatType<*>.aka(name: String) = Lang(this, name)
+        
+        infix fun <T: Item> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun <T: Block> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun <T: Identifier> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun Collection<String>.aka(iteratee: (String) -> String) = map { it aka iteratee(it) }
+        infix fun <T: Enchantment> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun <T: EntityType<*>> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun <T: EntityAttribute> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun <T: BasicItemGroup> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun <T: RegistryKey<ItemGroup>> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun <T: StatusEffect> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
+        infix fun <T: StatType<*>> Collection<T>.aka(iteratee: (T) -> String) = map { it aka iteratee(it) }
     }
 }

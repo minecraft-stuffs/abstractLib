@@ -23,7 +23,7 @@ abstract class AbstractBlockTagProvider(
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         val handler = BlockTagHandler(output.modId, this)
         
-        Register.Block.BLOCK.forEach { block ->
+        Register.loopBlock { block ->
             when (block.requiredToolLevel.miningLevel) {
                 MiningLevel.STONE -> getOrCreateTagBuilder(handler.getVanilia(needs_stone_tool)).add(block)
                 MiningLevel.IRON -> getOrCreateTagBuilder(handler.getVanilia(needs_iron_tool)).add(block)

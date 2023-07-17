@@ -22,97 +22,12 @@ class BlockLootTableHandler(
     val modId: String,
     val generator: BlockLootTableGenerator
 ) {
-    fun <T: Block> adds(blocks: Collection<T>, iteratee: (T) -> Builder) {
-        blocks.forEach {
-            + iteratee(it)
-        }
-    }
-
-    fun drop(block: Block, drop: ItemConvertible): Builder {
-        return builder {
-            from { block }
-            default {
-                drop { drop }
-            }
-        }
-    }
-
-    fun dropSelf(block: Block): Builder {
-        return builder {
-            from { block }
-            default {
-                drop { block }
-            }
-        }
-    }
-
-    fun dropConditional(block: Block, drop: ItemConvertible, condition: LootCondition.Builder): Builder {
-        return builder {
-            from { block }
-            case (condition) {
-                drop { drop }
-            }
-        }
-    }
-
-    fun dropSilkTouch(block: Block, drop: ItemConvertible): Builder
-        = this.dropConditional(block, drop, Condition.SILK_TOUCH)
-
-    fun dropShear(block: Block, drop: ItemConvertible)
-        = this.dropConditional(block, drop, Condition.SHEAR)
-
-    fun dropOre(block: Block, drop: ItemConvertible): Builder {
-        return builder {
-            from { block }
-            case (Condition.SILK_TOUCH) {
-                drop { block }
-            }
-            default {
-                drop { drop }
-                applyFortune { true }
-            }
-        }
+    operator fun plusAssign(builder: Builder) {
+        generator.addDrop(builder.from, LootTable.builder().pools(builder.pools.map { it.build() }))
     }
     
-    /**
-     * @param drop `Items.DIAMOND counts 3..5` 처럼 사용할 수 있습니다.
-     */
-    fun dropOre(block: Block, drop: Drop): Builder {
-        return builder {
-            from { block }
-            case (Condition.SILK_TOUCH) {
-                drop { block }
-            }
-            default {
-                drops { drop }
-                applyFortune { true }
-            }
-        }
-    }
-
-    fun dropOreLikeRedstone(block: Block, drop: ItemConvertible): Builder
-        = this.dropOre(block, drop counts 4..5)
-
-    fun dropOreLikeLapis(block: Block, drop: ItemConvertible): Builder
-        = this.dropOre(block, drop counts 4..9)
-
-    fun dropOreLikeCopper(block: Block, drop: ItemConvertible): Builder
-        = this.dropOre(block, drop counts 2..5)
-
-    object Condition {
-        // todo: Condition Builder
-
-        val SILK_TOUCH = MatchToolLootCondition.builder(
-            ItemPredicate.Builder.create().enchantment(
-                EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))
-            )
-        )
-
-        val SHEAR = MatchToolLootCondition.builder(
-            ItemPredicate.Builder.create().items(
-                Items.SHEARS
-            )
-        )
+    operator fun plusAssign(builders: Collection<Builder>) {
+        builders.forEach { this += it }
     }
 
     companion object {
@@ -128,14 +43,123 @@ class BlockLootTableHandler(
             return this.and(builder)
         }
         
-        operator fun Builder.unaryPlus() {
-            this.generator.addDrop(this.from, LootTable.builder().pools(this.pools.map { it.build() }))
+        fun builder(block: Builder.() -> Unit): Builder = Builder().apply(block)
+        
+        fun dropSelf(block: Block): Builder {
+            return builder {
+                from { block }
+                default {
+                    drop { block }
+                }
+            }
         }
+        
+        fun drop(block: Block, drop: ItemConvertible): Builder {
+            return builder {
+                from { block }
+                default {
+                    drop { drop }
+                }
+            }
+        }
+        
+        fun drop(block: Block, drop: Drop): Builder {
+            return builder {
+                from { block }
+                default {
+                    drops { drop }
+                }
+            }
+        }
+        
+        fun dropConditional(block: Block, drop: ItemConvertible, condition: LootCondition.Builder): Builder {
+            return builder {
+                from { block }
+                case (condition) {
+                    drop { drop }
+                }
+            }
+        }
+        
+        fun dropConditional(block: Block, drop: Drop, condition: LootCondition.Builder): Builder {
+            return builder {
+                from { block }
+                case (condition) {
+                    drops { drop }
+                }
+            }
+        }
+        
+        fun dropSilkTouch(block: Block, drop: ItemConvertible): Builder
+                = this.dropConditional(block, drop, Condition.SILK_TOUCH)
+        
+        fun dropSilkTouch(block: Block, drop: Drop): Builder
+                = this.dropConditional(block, drop, Condition.SILK_TOUCH)
+        
+        fun dropShear(block: Block, drop: ItemConvertible)
+                = this.dropConditional(block, drop, Condition.SHEAR)
+        
+        fun dropShear(block: Block, drop: Drop)
+                = this.dropConditional(block, drop, Condition.SHEAR)
+        
+        fun dropOre(block: Block, drop: ItemConvertible): Builder {
+            return builder {
+                from { block }
+                case (Condition.SILK_TOUCH) {
+                    drop { block }
+                }
+                default {
+                    drop { drop }
+                    applyFortune { true }
+                }
+            }
+        }
+        
+        /**
+         * @param drop `Items.DIAMOND counts 3..5` 처럼 사용할 수 있습니다.
+         */
+        fun dropOre(block: Block, drop: Drop): Builder {
+            return builder {
+                from { block }
+                case (Condition.SILK_TOUCH) {
+                    drop { block }
+                }
+                default {
+                    drops { drop }
+                    applyFortune { true }
+                }
+            }
+        }
+        
+        fun dropOreLikeRedstone(block: Block, drop: ItemConvertible): Builder
+                = this.dropOre(block, drop counts 4..5)
+        
+        fun dropOreLikeLapis(block: Block, drop: ItemConvertible): Builder
+                = this.dropOre(block, drop counts 4..9)
+        
+        fun dropOreLikeCopper(block: Block, drop: ItemConvertible): Builder
+                = this.dropOre(block, drop counts 2..5)
+        
+        fun loop(blocks: Collection<Block>, iteratee: (Block) -> Builder) = blocks.map(iteratee)
     }
-
-    fun builder(block: Builder.() -> Unit): Builder = Builder(generator).apply(block)
     
-    class Builder(val generator: BlockLootTableGenerator) {
+    object Condition {
+        // todo: Condition Builder
+        
+        val SILK_TOUCH = MatchToolLootCondition.builder(
+            ItemPredicate.Builder.create().enchantment(
+                EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))
+            )
+        )
+        
+        val SHEAR = MatchToolLootCondition.builder(
+            ItemPredicate.Builder.create().items(
+                Items.SHEARS
+            )
+        )
+    }
+    
+    class Builder {
         val pools = mutableListOf<LootPool.Builder>()
         lateinit var from: Block
 
@@ -185,7 +209,8 @@ class BlockLootTableHandler(
         }
 
         fun build(): LootPool.Builder {
-            // todo: applyExplosionDecay, etc...
+            // todo: Pool data class 만들기
+            //  - applyExplosionDecay, etc...
             //  - 내부 코드 뜯어서 다 호환시키기
 
             var pool = LootPool.builder().rolls(ConstantLootNumberProvider.create(rolls.toFloat()))

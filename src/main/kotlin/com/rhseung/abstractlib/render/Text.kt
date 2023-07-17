@@ -3,7 +3,7 @@ package com.rhseung.abstractlib.render
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 
-object Utils {
+object Text {
     fun Double.toText(): Text {
         return Text.literal(
             if (this.toInt().toDouble() == this) this.toInt().toString()

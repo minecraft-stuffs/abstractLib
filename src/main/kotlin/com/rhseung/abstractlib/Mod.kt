@@ -1,6 +1,6 @@
 package com.rhseung.abstractlib
 
-import com.rhseung.abstractlib.registration.ModInits
+import com.rhseung.abstractlib.registration.example.ModInits
 import net.fabricmc.api.ModInitializer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
