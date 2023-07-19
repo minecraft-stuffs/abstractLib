@@ -25,5 +25,5 @@ class TooltipHandler(
 }
 
 fun test(tooltipHandler: TooltipHandler) {
-
+    // todo: tkinter 처럼 구현 코드 구상하기
 }

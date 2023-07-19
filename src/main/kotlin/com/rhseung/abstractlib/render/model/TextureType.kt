@@ -1,4 +1,4 @@
-package com.rhseung.abstractlib.api.file
+package com.rhseung.abstractlib.render.model
 
 object TextureType {
     val ALL = "all"

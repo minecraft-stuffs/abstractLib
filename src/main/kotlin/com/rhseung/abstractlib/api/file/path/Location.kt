@@ -15,6 +15,8 @@ class Location(
     }
     
     companion object {
+        infix fun String.of(modId: String) = Location(modId, this)
+
         fun Location.with(change: (String) -> String) = Location(namespace, change(path))
         operator fun Location.plus(postfix: String) = this.with { it + postfix }
         operator fun String.plus(location: Location) = location.with { this + it }

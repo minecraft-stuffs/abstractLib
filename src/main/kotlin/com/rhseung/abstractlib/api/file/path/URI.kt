@@ -1,5 +1,9 @@
 package com.rhseung.abstractlib.api.file.path
 
+import com.google.gson.JsonParser
+import kotlin.io.path.Path
+import kotlin.io.path.listDirectoryEntries
+
 // note: 언젠가 모든 [Location]을 교체할 놈
 data class URI(
     val paths: List<String> = listOf()
@@ -11,17 +15,23 @@ data class URI(
         operator fun URI.div(other: String) = URI(paths + other)
         operator fun String.div(other: URI) = URI(listOf(this) + other.paths)
         operator fun URI.rangeTo(other: URI) = Location(this.toString(), other.toString())
-        
+
+        fun getModId(): String {
+            val current = Path(System.getProperty("user.dir"))
+            var projectRoot = current
+
+            while (projectRoot.listDirectoryEntries().find { it.fileName.toString() == "src" } == null) {
+                projectRoot = projectRoot.parent
+            }
+
+            val destination = projectRoot.resolve("src/main/resources/fabric.mod.json")
+
+            return JsonParser.parseString(destination.toFile().readText()).asJsonObject.get("id").asString
+        }
+
         val root = URI("")
         val minecraft = URI("minecraft")
-        
-        /** todo: automatically get modId from fabric.mod.json
-         * val modid = URI(JsonParser.parseString(
-         * 		File("/src/main/resources/fabric.mod.json").readText()
-         * 	).asJsonObject.get("id").asString)
-         *
-         * 	이 코드 작동 안하는 이유: 컴파일 타임에는 위치가 /run/...에 있기 때문에
-         */
+        val modid = URI(getModId())
         
         val assets = URI("assets")
             val blockstates = URI("blockstates")

@@ -3,7 +3,7 @@ package com.rhseung.abstractlib.data
 import com.rhseung.abstractlib.api.annotation.en_us
 import com.rhseung.abstractlib.data.LanguageHandler.Companion.aka
 import com.rhseung.abstractlib.registration.Register
-import com.rhseung.abstractlib.registration.key.IBasicKey
+import com.rhseung.abstractlib.registration.key.IBasicRegistryKey
 import com.rhseung.abstractlib.registration.key.BasicItemGroup
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
@@ -15,7 +15,6 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.stat.StatType
-import net.minecraft.item.ItemGroup
 import net.minecraft.registry.RegistryKey
 import kotlin.reflect.KClass
 
@@ -40,10 +39,11 @@ abstract class AbstractLanguageProvider(
      * @see LanguageHandler
      */
     open fun register(lang: LanguageHandler) {
-        val getLangSafe = { it: IBasicKey -> it.names[languageCode] ?: it.names[en_us::class]!! }
-        
-        lang += Register.Item.ITEM aka getLangSafe
-        lang += Register.Block.BLOCK aka getLangSafe
-        lang += Register.ItemGroup.ITEM_GROUP aka getLangSafe
+        val getLangSafe = { it: IBasicRegistryKey -> it.names[languageCode] ?: it.names[en_us::class]!! }
+
+        // fixme
+//        lang += Register.item.ITEM aka getLangSafe
+//        lang += Register.Block.BLOCK aka getLangSafe
+//        lang += Register.ItemGroup.ITEM_GROUP aka getLangSafe
     }
 }

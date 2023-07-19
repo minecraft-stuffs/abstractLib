@@ -1,16 +1,20 @@
 package com.rhseung.abstractlib
 
-import com.rhseung.abstractlib.registration.example.ModInits
+import com.rhseung.abstractlib.api.file.path.URI
 import net.fabricmc.api.ModInitializer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object Mod : ModInitializer {
-	val modId: String = "abstractlib"   // note: 나중에 URI에서 modid 가져오기
-	
-    val logger: Logger = LoggerFactory.getLogger(modId)
+	val modId = URI.getModId()
+    val logger = LoggerFactory.getLogger(modId)
 
 	override fun onInitialize() {
-		ModInits(modId).update()
+//		ModItems.register()
+//		ModBlocks.register()
+		// todo: ModItemGroups
+//		ModItemGroups.register()
+
+		// note: 나중에 ModTags, ModRecipes 같이 registry와 상관 없는 객체 ModInit들을 다룰텐데, 어떻게 할지 생각해보기
 	}
 }

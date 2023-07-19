@@ -23,18 +23,18 @@ abstract class AbstractBlockTagProvider(
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         val handler = BlockTagHandler(output.modId, this)
         
-        Register.loopBlock { block ->
-            when (block.requiredToolLevel.miningLevel) {
-                MiningLevel.STONE -> getOrCreateTagBuilder(handler.getVanilia(needs_stone_tool)).add(block)
-                MiningLevel.IRON -> getOrCreateTagBuilder(handler.getVanilia(needs_iron_tool)).add(block)
-                MiningLevel.DIAMOND -> getOrCreateTagBuilder(handler.getVanilia(needs_diamond_tool)).add(block)
-                else -> if (block.requiredToolLevel.miningLevel > MiningLevel.DIAMOND)
-                    getOrCreateTagBuilder(handler.getVanilia("needs_tool_level_${block.requiredToolLevel.miningLevel.toInt()}")).add(block)
-            }
-            
-            if (block.requiredToolLevel.toolType != ToolType.ANY)
-                getOrCreateTagBuilder(handler.getVanilia(mineable/block.requiredToolLevel.toolType.name)).add(block)
-        }
+//        Register.loopBlock { block ->
+//            when (block.requiredToolLevel.miningLevel) {
+//                MiningLevel.STONE -> getOrCreateTagBuilder(handler.getVanilia(needs_stone_tool)).add(block)
+//                MiningLevel.IRON -> getOrCreateTagBuilder(handler.getVanilia(needs_iron_tool)).add(block)
+//                MiningLevel.DIAMOND -> getOrCreateTagBuilder(handler.getVanilia(needs_diamond_tool)).add(block)
+//                else -> if (block.requiredToolLevel.miningLevel > MiningLevel.DIAMOND)
+//                    getOrCreateTagBuilder(handler.getVanilia("needs_tool_level_${block.requiredToolLevel.miningLevel.toInt()}")).add(block)
+//            }
+//
+//            if (block.requiredToolLevel.toolType != ToolType.ANY)
+//                getOrCreateTagBuilder(handler.getVanilia(mineable/block.requiredToolLevel.toolType.name)).add(block)
+//        }
     }
 
     open fun register(handler: BlockTagHandler) {

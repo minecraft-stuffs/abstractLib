@@ -5,6 +5,15 @@ import com.rhseung.abstractlib.api.file.path.URI
 import com.rhseung.abstractlib.api.utility.ErrorSolver
 import java.lang.IllegalArgumentException
 
+typealias NbtString = Nbt.NbtValue<String>
+typealias NbtInt = Nbt.NbtValue<Int>
+typealias NbtFloat = Nbt.NbtValue<Float>
+typealias NbtList<T> = Nbt.NbtValue<List<T>>
+typealias NbtLong = Nbt.NbtValue<Long>
+typealias NbtShort = Nbt.NbtValue<Short>
+typealias NbtByte = Nbt.NbtValue<Byte>
+typealias NbtDouble = Nbt.NbtValue<Double>
+
 object Nbt {
 	interface NbtElement {
 		val key: URI

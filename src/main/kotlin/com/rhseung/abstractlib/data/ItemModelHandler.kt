@@ -3,8 +3,8 @@ package com.rhseung.abstractlib.data
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
-import com.rhseung.abstractlib.api.file.Parents
-import com.rhseung.abstractlib.api.file.TextureType
+import com.rhseung.abstractlib.render.model.Parents
+import com.rhseung.abstractlib.render.model.TextureType
 import com.rhseung.abstractlib.api.file.path.Location
 import com.rhseung.abstractlib.api.file.path.URI
 import com.rhseung.abstractlib.registration.key.BasicItem

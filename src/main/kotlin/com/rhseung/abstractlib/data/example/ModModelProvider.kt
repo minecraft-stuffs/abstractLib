@@ -11,13 +11,14 @@ class ModModelProvider(
 ) : AbstractModelProvider(output) {
 
     override fun registerItem(itemModel: ItemModelHandler) {
-        // todo: 조금 수정
-        itemModel += itemModel.loop(Register.Item.ITEM) { itemModel.simple(it) }
+        // todo: i hate this code, but we need modid in the path
+//        itemModel += itemModel.simple()
+//        itemModel += itemModel.loop(Register.item.ITEM) { itemModel.simple(it) }
     }
 
     override fun registerBlock(blockModel: BlockModelHandler) {
-        Register.loopBlock {
-            blockModel.simple(it)
-        }
+//        Register.loopBlock {
+//            blockModel.simple(it)
+//        }
     }
 }

@@ -1,4 +1,4 @@
-package com.rhseung.abstractlib.api.file
+package com.rhseung.abstractlib.render.model
 
 import com.rhseung.abstractlib.api.file.path.URI.Companion.block
 import com.rhseung.abstractlib.api.file.path.URI.Companion.div

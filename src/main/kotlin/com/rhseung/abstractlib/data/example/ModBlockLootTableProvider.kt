@@ -18,6 +18,6 @@ class ModBlockLootTableProvider(
 ) : AbstractBlockLootTableProvider(output) {
 
     override fun register(blockLootTable: BlockLootTableHandler) {
-        blockLootTable += loop(Register.Block.BLOCK) { dropSelf(it) }
+//        blockLootTable += loop(Register.Block.BLOCK) { dropSelf(it) }
     }
 }
