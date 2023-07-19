@@ -47,6 +47,7 @@ object Nbt {
 		override fun get(key: URI) = throw NotImplementedError()
 		
 		override fun set(key: URI, value: Any?) {
+			@Suppress("UNCHECKED_CAST")
 			this.value = (value as? T) ?: throw IllegalArgumentException("NbtValue $key is not T")
 		}
 	}
