@@ -2,7 +2,7 @@ plugins {
 	id 'fabric-loom' version '1.2-SNAPSHOT'
 	id 'maven-publish'
 	id "org.jetbrains.kotlin.jvm" version "1.9.0"
-//  id "org.jetbrains.kotlin.jvm" version "1.8.22"
+//  	id "org.jetbrains.kotlin.jvm" version "1.8.22"
 }
 
 version = project.mod_version
@@ -36,7 +36,7 @@ sourceSets {
 	main {
 		resources {
 			srcDirs += [
-					'src/main/generated'
+				'src/main/generated'
 			]
 		}
 	}
