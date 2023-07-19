@@ -10,10 +10,8 @@ class Location(
     constructor(path: String): this("minecraft", path)
     constructor(id: Identifier): this(id.namespace, id.path)
 
-    override fun toString(): String {
-        return "$namespace:$path"
-    }
-    
+    override fun toString() = "$namespace:$path"
+
     companion object {
         infix fun String.of(modId: String) = Location(modId, this)
 
