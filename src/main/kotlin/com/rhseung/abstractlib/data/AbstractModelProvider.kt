@@ -21,5 +21,8 @@ abstract class AbstractModelProvider(
         registerItem(itemModel)
     }
 
-    open fun registerItem(itemModel: ItemModelHandler) {}
+    open fun registerItem(itemModel: ItemModelHandler) {
+        // test
+        ItemModelHandler.test()
+    }
 }

@@ -39,7 +39,10 @@ class ItemModelHandler(
         }
     
     companion object {
-    
+        // test
+        fun test() {
+            println(URI.getModId())
+        }
     }
 
     data class Model(val id: Identifier, var parent: URI, val textures: MutableList<Texture>)
