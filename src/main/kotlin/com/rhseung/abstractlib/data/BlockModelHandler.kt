@@ -1,13 +1,13 @@
 package com.rhseung.abstractlib.data
 
-import com.rhseung.abstractlib.registration.key.BasicBlock
+import com.rhseung.abstractlib.registration.key.Block
 import net.minecraft.data.client.BlockStateModelGenerator
 
 class BlockModelHandler(
     val modId: String,
     val generator: BlockStateModelGenerator
 ) {
-    fun simple(block: BasicBlock) {
+    fun simple(block: Block) {
         generator.registerSimpleCubeAll(block)
     }
 

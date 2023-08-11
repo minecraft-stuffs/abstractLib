@@ -3,7 +3,8 @@ package com.rhseung.abstractlib.data.example
 import com.rhseung.abstractlib.data.AbstractModelProvider
 import com.rhseung.abstractlib.data.BlockModelHandler
 import com.rhseung.abstractlib.data.ItemModelHandler
-import com.rhseung.abstractlib.registration.Register
+import com.rhseung.abstractlib.data.ItemModelHandler.Companion.simple
+import com.rhseung.abstractlib.registration.MyRegistry
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
 class ModModelProvider(
@@ -11,14 +12,10 @@ class ModModelProvider(
 ) : AbstractModelProvider(output) {
 
     override fun registerItem(itemModel: ItemModelHandler) {
-        // todo: i hate this code, but we need modid in the path
-//        itemModel += itemModel.simple()
-//        itemModel += itemModel.loop(Register.item.ITEM) { itemModel.simple(it) }
+        MyRegistry.ITEMS.forEach { itemModel += simple(it) }
     }
 
     override fun registerBlock(blockModel: BlockModelHandler) {
-//        Register.loopBlock {
-//            blockModel.simple(it)
-//        }
+        MyRegistry.BLOCKS.forEach { blockModel.simple(it) }
     }
 }

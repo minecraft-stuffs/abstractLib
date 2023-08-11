@@ -25,10 +25,6 @@ class BlockLootTableHandler(
     operator fun plusAssign(builder: Builder) {
         generator.addDrop(builder.from, LootTable.builder().pools(builder.pools.map { it.build() }))
     }
-    
-    operator fun plusAssign(builders: Collection<Builder>) {
-        builders.forEach { this += it }
-    }
 
     companion object {
         infix fun ItemConvertible.counts(num: Int): Drop {
@@ -139,8 +135,6 @@ class BlockLootTableHandler(
         
         fun dropOreLikeCopper(block: Block, drop: ItemConvertible): Builder
                 = this.dropOre(block, drop counts 2..5)
-        
-        fun loop(blocks: Collection<Block>, iteratee: (Block) -> Builder) = blocks.map(iteratee)
     }
     
     object Condition {

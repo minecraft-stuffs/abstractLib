@@ -7,9 +7,8 @@ import com.rhseung.abstractlib.render.model.Parents
 import com.rhseung.abstractlib.render.model.TextureType
 import com.rhseung.abstractlib.api.file.path.Location
 import com.rhseung.abstractlib.api.file.path.URI
-import com.rhseung.abstractlib.registration.key.BasicItem
+import com.rhseung.abstractlib.registration.key.Item
 import net.minecraft.data.client.ItemModelGenerator
-import net.minecraft.item.Item
 import net.minecraft.util.Identifier
 import java.util.function.BiConsumer
 import java.util.function.Supplier
@@ -22,26 +21,20 @@ class ItemModelHandler(
         generate(builder)
     }
     
-    operator fun plusAssign(builders: List<Builder>) {
-        builders.forEach(::generate)
-    }
-    
-    fun <T: Item> loop(items: Collection<T>, iteratee: (T) -> Builder) = items.map(iteratee)
-    
-    fun simple(basicItem: BasicItem, path: String = basicItem.id.path) =
-        builder {
-            model(basicItem.id.path) {
-                parent { Parents.GENERATED }
-                textures {
-                    + path
+    companion object {
+        fun builder(lambda: Builder.() -> Unit): Builder {
+            return Builder().apply(lambda)
+        }
+
+        fun simple(item: Item, path: String = item.id.path): Builder {
+            return builder {
+                model(item.id.path) {
+                    parent { Parents.GENERATED }
+                    textures {
+                        + path
+                    }
                 }
             }
-        }
-    
-    companion object {
-        // test
-        fun test() {
-            println(URI.getModId())
         }
     }
 
@@ -50,12 +43,9 @@ class ItemModelHandler(
     data class Texture(var type: String, val id: Identifier)
 
     data class Override(val predicates: MutableMap<Identifier, Number>, val model: Model)
-    
-    fun builder(lambda: Builder.() -> Unit): Builder {
-        return Builder(modId).apply(lambda)
-    }
 
-    class Builder(val modId: String) {
+    class Builder {
+        val modId = URI.getModId()
         lateinit var model: Model
         var overrides = mutableListOf<Override>()
 

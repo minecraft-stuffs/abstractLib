@@ -22,7 +22,5 @@ abstract class AbstractModelProvider(
     }
 
     open fun registerItem(itemModel: ItemModelHandler) {
-        // test
-        ItemModelHandler.test()
     }
 }

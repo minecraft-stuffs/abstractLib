@@ -12,9 +12,6 @@ import com.rhseung.abstractlib.data.BlockLootTableHandler.Companion.dropOre
 import com.rhseung.abstractlib.data.BlockLootTableHandler.Companion.dropOreLikeLapis
 import com.rhseung.abstractlib.data.BlockLootTableHandler.Companion.dropOreLikeRedstone
 import com.rhseung.abstractlib.data.BlockLootTableHandler.Companion.dropOreLikeCopper
-import com.rhseung.abstractlib.data.BlockLootTableHandler.Companion.loop
-
-import net.minecraft.block.Block
 
 abstract class AbstractBlockLootTableProvider(
     open val output: FabricDataOutput

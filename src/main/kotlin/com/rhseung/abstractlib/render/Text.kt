@@ -3,6 +3,7 @@ package com.rhseung.abstractlib.render
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 
+// todo: refactoring
 object Text {
     fun Double.toText(): Text {
         return Text.literal(
@@ -31,7 +32,6 @@ object Text {
         return t
     }
 
-    // todo: 내가 쓴 코드 이해하기
     fun String.coloring(
         vararg colors: Color,
         s: String = "<<",

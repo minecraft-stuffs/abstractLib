@@ -29,5 +29,5 @@ class NbtStack(
 		val tag = URI("tag")
 	}
 	
-	// todo: implement
+	// todo: implement all itemStack function
 }

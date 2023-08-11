@@ -1,4 +1,4 @@
-//package com.rhseung.abstractlib.registration.example
+package com.rhseung.abstractlib.registration.old//package com.rhseung.abstractlib.registration.example
 //
 //import com.rhseung.abstractlib.api.NbtStack
 //import com.rhseung.abstractlib.api.NbtStack.Companion.attack_damage
